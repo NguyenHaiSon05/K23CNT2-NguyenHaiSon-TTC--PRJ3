@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="fragments/_admin_layout :: adminHead('Admin - Danh sách sinh viên')"></head>
+<body>
+<header th:replace="fragments/_admin_layout :: adminHeader"></header>
+<nav th:replace="fragments/_admin_layout :: adminMenu"></nav>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Danh sách sinh viên</h3>
+        <a class="btn btn-primary" th:href="@{/admin/students/add}">+ Thêm sinh viên</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Lớp</th>
+            <th>SĐT</th>
+            <th>Địa chỉ</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sv : ${students}">
+            <td th:text="${sv.id}">1</td>
+            <td th:text="${sv.fullName}">Tên</td>
+            <td th:text="${sv.email}">email</td>
+            <td th:text="${sv.lop}">K23CNT2</td>
+            <td th:text="${sv.phone}">0909xxx</td>
+            <td th:text="${sv.address}">Hà Nội</td>
+            <td>
+                <a th:href="@{'/admin/students/edit/' + ${sv.id}}" class="btn btn-sm btn-warning">Sửa</a>
+                <a th:href="@{'/admin/students/delete/' + ${sv.id}}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Xóa sinh viên này?');">
+                    Xóa
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/_admin_layout :: adminFooter"></footer>
+</body>
+</html>
