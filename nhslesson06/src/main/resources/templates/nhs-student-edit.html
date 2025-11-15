@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cập nhật sinh viên - NHS</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body style="background: #ccc">
+
+<header class="bg-white py-2 mb-4">
+    <div class="container">
+        <img src="https://devmaster.edu.vn/Images/logo.png" height="50">
+    </div>
+</header>
+
+<section class="container bg-white p-4 rounded">
+
+    <h3 class="mb-3 text-center">CẬP NHẬT THÔNG TIN SINH VIÊN (NHS)</h3>
+
+    <form th:action="@{'/nhs/students/update/' + ${student.nhsId}}"
+          th:object="${student}" method="post">
+
+        <div class="card mb-3">
+            <div class="card-body row">
+
+                <!-- ID (readonly) -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">ID</label>
+                    <input type="text" th:field="*{nhsId}" class="form-control" readonly>
+                </div>
+
+                <!-- Name -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Họ tên</label>
+                    <input type="text" th:field="*{nhsName}" class="form-control"
+                           placeholder="Nhập họ tên..." required>
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" th:field="*{nhsEmail}" class="form-control"
+                           placeholder="example@gmail.com" required>
+                </div>
+
+                <!-- Age -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Tuổi</label>
+                    <input type="number" th:field="*{nhsAge}" min="1" max="120"
+                           class="form-control" placeholder="18" required>
+                </div>
+
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary me-2">Cập nhật</button>
+                <a th:href="@{/nhs/students}" class="btn btn-secondary">Hủy</a>
+            </div>
+        </div>
+
+    </form>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
