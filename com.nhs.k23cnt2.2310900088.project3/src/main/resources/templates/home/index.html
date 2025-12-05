@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>FreshFruit - Trang chủ</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- CSS RIÊNG CỦA TRANG HOME -->
+    <link rel="stylesheet" th:href="@{/css/home/index.css}">
+
+    <style>
+        .banner img { width: 100%; border-radius: 10px; }
+        .service-box { text-align: center; padding: 20px; }
+        .service-box i { font-size: 40px; color: #0d6efd; }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div th:replace="layout/header :: header"></div>
+
+<!-- Swiper Banner giống VinFruits -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+
+<!-- Banner Swiper -->
+<div class="swiper bannerSwiper mt-3">
+    <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+            <img src="/uploads/banner/banner1.png" alt="banner1">
+        </div>
+
+        <div class="swiper-slide">
+            <img src="/uploads/banner/banner2.png" alt="banner2">
+        </div>
+
+        <div class="swiper-slide">
+            <img src="/uploads/banner/banner3.png" alt="banner3">
+        </div>
+
+    </div>
+
+    <!-- Chấm -->
+    <div class="swiper-pagination"></div>
+</div>
+
+
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper(".bannerSwiper", {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        effect: "fade",
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+<!-- DANH MỤC NỔI BẬT -->
+<div class="container my-5">
+
+    <h2 class="section-title text-center mb-5">
+        Danh Mục <span>Nổi Bật</span>
+    </h2>
+
+    <div class="row g-4 category-list">
+
+        <!-- Trái Cây Nhập Khẩu -->
+        <div class="col-md-4">
+            <div class="category-item">
+                <img src="/uploads/danhmuc/danhmuc1.png" alt="">
+                <div class="category-text">Trái Cây Nhập Khẩu</div>
+            </div>
+        </div>
+
+        <!-- Giỏ Quà Trái Cây -->
+        <div class="col-md-4">
+            <div class="category-item">
+                <img src="/uploads/danhmuc/danhmuc2.png" alt="">
+                <div class="category-text">Giỏ Quà Trái Cây</div>
+            </div>
+        </div>
+
+        <!-- Quà Tặng Doanh Nghiệp -->
+        <div class="col-md-4">
+            <div class="category-item">
+                <img src="/uploads/danhmuc/danhmuc3.png" alt="">
+                <div class="category-text">Quà Tặng Doanh Nghiệp</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+/*  LOGO  */
+.logo-img {
+    width: 120px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 2px;
+}
+.header-main {
+    padding: 15px 0;
+}
+
+/* Chữ */
+.logo-text {
+    font-size: 40px;
+    font-weight: 800;
+    color: #1f8c5c;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    margin-left: 10px;
+}
+
+
+.header-social {
+    margin-left: 0 !important;
+    padding-left: 1px !important; /* chỉnh tùy ý 0–20px */
+}
+
+.header-icons {
+    margin-right: 0 !important;
+    padding-right: 1px !important; /* chỉnh tùy ý 0–20px */
+}
+
+
+
+
+
+
+
+
+
+
+

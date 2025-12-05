@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Sửa sản phẩm</title></head>
+<body>
+
+<h1>Sửa sản phẩm</h1>
+
+<form action="/admin/products/update" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="productId" th:value="${product.productId}">
+
+    <label>Tên sản phẩm:</label><br>
+    <input type="text" name="name" th:value="${product.name}"><br>
+
+    <label>Giá:</label><br>
+    <input type="number" name="price" th:value="${product.price}"><br>
+
+    <label>Ảnh hiện tại:</label><br>
+    <img th:src="${product.image}" width="120"><br>
+
+    <label>Chọn ảnh mới (nếu muốn thay):</label><br>
+    <input type="file" name="imageFile"><br>
+
+    <label>Mô tả:</label><br>
+    <textarea name="description" th:text="${product.description}"></textarea><br>
+
+    <label>Số lượng tồn:</label><br>
+    <input type="number" name="stock" th:value="${product.stock}"><br>
+
+    <label>Danh mục:</label><br>
+    <select name="category.categoryId">
+        <option th:each="c : ${categories}"
+                th:value="${c.categoryId}"
+                th:text="${c.name}"
+                th:selected="${c.categoryId == product.category.categoryId}">
+        </option>
+    </select><br><br>
+
+    <button type="submit">Cập nhật</button>
+</form>
+
+
+</body>
+</html>

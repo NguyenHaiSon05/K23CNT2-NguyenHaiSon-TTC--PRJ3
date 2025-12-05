@@ -36,9 +36,10 @@
 
             <!-- Image -->
             <td>
-                <img th:src="${book.imgUrl}"
+                <img th:src="@{'/images/nhsbook/' + ${book.imgUrl}}"
                      th:attr="alt=${book.name}"
-                     style="width: 50px; height: 50px; object-fit: cover;"/>
+                     style="width: 50px; height: 50px; object-fit: cover;">
+
             </td>
 
             <td th:text="${book.quantity}"></td>

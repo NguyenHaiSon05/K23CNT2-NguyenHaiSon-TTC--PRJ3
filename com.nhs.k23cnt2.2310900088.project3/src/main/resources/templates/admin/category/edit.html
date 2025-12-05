@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sửa danh mục</title>
+</head>
+<body>
+
+<h1>Sửa danh mục</h1>
+
+<form action="/admin/categories/update" method="post">
+    <input type="hidden" name="categoryId" th:value="${category.categoryId}">
+
+    <label>Tên danh mục:</label><br>
+    <input type="text" name="name" th:value="${category.name}"><br>
+
+    <label>Mô tả:</label><br>
+    <textarea name="description" th:text="${category.description}"></textarea><br><br>
+
+    <button type="submit">Cập nhật</button>
+</form>
+
+</body>
+</html>
