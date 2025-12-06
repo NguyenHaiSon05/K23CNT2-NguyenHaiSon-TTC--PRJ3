@@ -1,6 +1,8 @@
 package com.freshfruit.nhscontroller;
 
+import com.freshfruit.nhsentity.RoleEntity;
 import com.freshfruit.nhsentity.UserEntity;
+import com.freshfruit.nhsrepository.RoleRepository;
 import com.freshfruit.nhsrepository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder encoder;
 
     @GetMapping("/login")
@@ -31,8 +34,12 @@ public class AuthController {
     @PostMapping("/register")
     public String registerSubmit(@ModelAttribute UserEntity user) {
 
+        // mã hóa mật khẩu
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER"); // mặc định user thường
+
+        // gán ROLE_USER
+        RoleEntity role = roleRepository.findByRoleName("ROLE_USER");
+        user.setRole(role);
 
         userRepository.save(user);
 

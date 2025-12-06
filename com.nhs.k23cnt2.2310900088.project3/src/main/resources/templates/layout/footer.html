@@ -1,11 +1,50 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<body>
+<footer class="footer"
+        th:fragment="footer"
+        xmlns:th="http://www.thymeleaf.org">
 
-<footer th:fragment="footer" class="bg-dark text-white text-center p-3 mt-5">
-    <p>© 2025 FreshFruit. All rights reserved.</p>
+
+<div class="footer-container">
+
+        <div class="footer-column">
+            <h3 class="footer-title">CẬP NHẬT NHỮNG THÔNG TIN MỚI NHẤT TỪ CHÚNG TÔI</h3>
+
+            <div class="subscribe-box">
+                <input type="email" placeholder="Địa chỉ Email *">
+                <button>ĐĂNG KÝ</button>
+            </div>
+
+            <ul class="footer-links">
+                <li>KHÁCH HÀNG THÂN THIẾT</li>
+                <li>CHÍNH SÁCH GIAO HÀNG</li>
+                <li>CHÍNH SÁCH QUÀ TẶNG</li>
+                <li>THANH TOÁN QUA VNPAY</li>
+                <li>ĐIỀU KHOẢN & ĐIỀU KIỆN</li>
+                <li>CHÍNH SÁCH BẢO MẬT</li>
+            </ul>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">Liên Hệ Ngay Với FreshFruit.</h3>
+
+            <p><strong>THỨ 2 - CHỦ NHẬT:</strong> 8:00-20:00 PM</p>
+            <p><strong>PHONE:</strong> 012.3456.789</p>
+            <p><strong>EMAIL:</strong> INFO@FRESHFRUIT.COM</p>
+            <p><strong>CỬA HÀNG:</strong> 28A LÊ TRỌNG TẤN - HÀ ĐÔNG - HÀ NỘI</p>
+
+            <div class="footer-social">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-tiktok"></i>
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2024 FreshFruit. Only The Finest Fruits.
+    </div>
+
 </footer>
-
-
-</body>
-</html>

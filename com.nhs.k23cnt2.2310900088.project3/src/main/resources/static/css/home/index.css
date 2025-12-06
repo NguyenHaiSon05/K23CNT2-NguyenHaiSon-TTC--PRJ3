@@ -93,3 +93,131 @@
     object-fit: cover !important;
     display: block;
 }
+
+/*Danh muc noi bat*/
+.blink-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #1f8c5c;
+    text-align: center;
+    animation: colorBlink 1.2s infinite;
+}
+
+@keyframes colorBlink {
+    0% { color: #1f8c5c; }
+    50% { color: #34c98a; }
+    100% { color: #1f8c5c; }
+}
+
+/*San Pham Noi Bat*/
+
+.section-title h2 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.section-title h2 span {
+    color: #2EB872;
+    position: relative;
+}
+
+.section-title h2 span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 6px;
+    background-color: #ff6f61; /* màu đỏ gạch chân */
+    border-radius: 3px;
+}
+
+.product-tabs {
+    margin-top: 20px;
+}
+
+.product-tabs a {
+    margin: 0 25px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    padding-bottom: 8px;
+    color: #666;
+}
+
+.product-tabs a.active {
+    color: #000;
+    border-bottom: 3px solid black;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 0 40px;
+    margin-top: 40px;
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product-item h3 {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.product-item .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+/*SanPhamMoiNhat*/
+
+a.active {
+    text-decoration: none;
+    border-bottom: 3px solid black;
+    padding-bottom: 4px;
+}
+/*Danh muc noi bat*/
+.category-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 50px 0;
+}
+
+.category-box {
+    width: 430px;
+    height: 430px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.category-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    transition: 0.3s ease;
+}
+
+.category-box:hover::before {
+    background: rgba(0,0,0,0.2);
+}
+
+.category-box span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+}
+

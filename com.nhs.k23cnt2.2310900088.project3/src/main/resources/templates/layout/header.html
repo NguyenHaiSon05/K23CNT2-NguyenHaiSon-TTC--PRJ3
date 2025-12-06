@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
-<header th:fragment="header">
+<header th:fragment="header"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
     <meta charset="UTF-8">
     <title>FreshFruit</title>
@@ -30,7 +30,7 @@
             <!-- 🔹 Logo GIỮA -->
             <a href="/" class="header-logo d-flex align-items-center text-decoration-none">
                 <img src="/uploads/logo.png" class="logo-img" alt="logo">
-                <h2 class="logo-text m-0">FreshFruit</h2>
+                <h2 class="logo-text m-0">Fresh Fruit</h2>
 
             </a>
 
@@ -39,9 +39,19 @@
             <!-- 🔹 Icons (phải) -->
             <div class="header-icons d-flex align-items-center">
 
-                <a href="/login" class="me-4 text-dark">
+                <!-- Hiện icon login khi CHƯA đăng nhập -->
+                <a sec:authorize="isAnonymous()" href="/login" class="me-4 text-dark">
                     <i class="far fa-user fs-4"></i>
                 </a>
+
+                <!-- Hiện tên user + logout khi ĐÃ đăng nhập -->
+                <div sec:authorize="isAuthenticated()" class="me-4 text-dark d-flex align-items-center gap-2">
+                    <i class="fas fa-user-circle fs-4"></i>
+                    <span th:text="${#authentication.name}">User</span>
+                    <a href="/logout" class="text-danger">
+                        <i class="fas fa-sign-out-alt fs-4"></i>
+                    </a>
+                </div>
 
                 <a href="/search" class="me-4 text-dark">
                     <i class="fas fa-search fs-4"></i>
@@ -76,18 +86,54 @@
             <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
                 <ul class="navbar-nav fw-bold fs-5">
 
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="/products">BÁN CHẠY</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle-custom" href="#">
+                            BÁN CHẠY <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+
+                        <div class="dropdown-menu mega-menu">
+                            <div class="menu-column">
+                                <h4>THEO NHU CẦU</h4>
+                                <a href="#">Quà Chúc Mừng</a>
+                                <a href="#">Quà Chia Buồn</a>
+                                <a href="#">Tặng Cha Mẹ</a>
+                                <a href="#">Tặng Người Yêu</a>
+                            </div>
+
+                            <div class="menu-column">
+                                <h4>THEO NGÂN SÁCH</h4>
+                                <a href="#">Dưới 1Tr</a>
+                                <a href="#">1Tr – 2Tr</a>
+                                <a href="#">2Tr – 3Tr</a>
+                                <a href="#">Trên 3.000.000đ</a>
+                            </div>
+
+                            <div class="menu-column">
+                                <h4>LOẠI HÌNH</h4>
+                                <a href="#">Giỏ Trái Cây + Hoa Tươi</a>
+                                <a href="#">Giỏ Trái Cây + Rượu</a>
+                                <a href="#">Khay Trái Cây</a>
+                                <a href="#">GIFT BOX</a>
+                            </div>
+
+                            <div class="menu-column">
+                                <h4>QUÀ LỄ & TẾT</h4>
+                                <a href="#">Quà Trung Thu</a>
+                                <a href="#">Quà Tặng 8/3</a>
+                                <a href="#">Quà Tặng Tết</a>
+                                <a href="#">Quà Tặng 20/11</a>
+                            </div>
+                        </div>
                     </li>
 
-                    <li class="nav-item mx-3 dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            GIỎ QUÀ TRÁI CÂY
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Giỏ quà cao cấp</a></li>
-                            <li><a class="dropdown-item" href="#">Giỏ quà Tết</a></li>
-                        </ul>
+
+                    <li class="nav-item mx-3 ">
+                        <a class="nav-link" href="#">GIỎ QUÀ TRÁI CÂY </a>
+                    </li>
+
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" href="#">TRÁI CÂY NỘI ĐỊA</a>
                     </li>
 
                     <li class="nav-item mx-3">

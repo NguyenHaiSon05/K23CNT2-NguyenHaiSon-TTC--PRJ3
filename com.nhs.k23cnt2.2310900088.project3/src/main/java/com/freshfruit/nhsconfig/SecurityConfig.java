@@ -2,9 +2,8 @@ package com.freshfruit.nhsconfig;
 
 import com.freshfruit.nhsservice.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
+import org.springframework.context.annotation.*;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -22,40 +21,50 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userDetailsService);
-        auth.setPasswordEncoder(passwordEncoder());
-        return auth;
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable()) // TẮT CSRF để login hoạt động
+                .csrf(csrf -> csrf.disable())
+
+                // CẤP QUYỀN TRUY CẬP
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/register", "/login", "/css/**", "/js/**", "/uploads/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers(
+                                "/login",
+                                "/register",
+                                "/css/**",
+                                "/js/**",
+                                "/uploads/**",
+                                "/",
+                                "/home"
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(login -> login
+
+                // FORM LOGIN
+                .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
+
+                // LOGOUT
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
+                        .permitAll()
                 )
+
+                // THÊM AUTHENTICATION PROVIDER → BẮT BUỘC
                 .authenticationProvider(authenticationProvider());
 
         return http.build();
     }
-
-
-
 }

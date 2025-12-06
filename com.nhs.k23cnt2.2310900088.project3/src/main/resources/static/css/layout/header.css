@@ -30,6 +30,93 @@
     margin-right: 0 !important;
     padding-right: 1px !important; /* chỉnh tùy ý 0–20px */
 }
+/*Danh mục k xuong dong*/
+.navbar-nav {
+    flex-wrap: nowrap !important;
+}
+
+.nav-item {
+    white-space: nowrap !important;
+}
+
+/* MENU DROPDOWN Ban Chay */
+.dropdown {
+    position: relative;
+}
+
+/* Ẩn mặc định */
+
+.dropdown-menu {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 1500px;
+    padding: 40px 60px;
+    background: white;
+    display: flex;
+    gap: 80px;
+    order-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    z-index: 999;
+}
+/* Hiện khi hover */
+.dropdown:hover .dropdown-menu {
+    display: flex !important;
+}
+/* Từng cột */
+.menu-column {
+    flex: 1;
+    min-width: 250px;
+}
+/* Tiêu đề cột */
+.menu-column h4 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+/* Link trong menu */
+.menu-column a {
+    display: block;
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+}
+.menu-column a:hover {
+    color: #009879;
+}
+/* Hiện khi di chuột */
+.dropdown:hover .dropdown-menu {
+    display: flex !important;
+}
+
+
+/* Định dạng icon mũi tên */
+.dropdown-toggle-custom i {
+    font-size: 12px;
+    margin-left: 5px;
+    transition: transform 0.2s ease;
+}
+
+/* Khi di chuột thì xoay mũi tên */
+.dropdown:hover .dropdown-toggle-custom i {
+    transform: rotate(180deg);
+}
+/*Logo nhap nhay*/
+.logo-text {
+    font-size: 40px;
+    font-weight: 800;
+    color: #1f8c5c;
+    animation: colorPulse 1.2s infinite;
+}
+
+@keyframes colorPulse {
+    0% { color: #1f8c5c; }
+    50% { color: #32d49a; }
+    100% { color: #1f8c5c; }
+}
+
 
 
 

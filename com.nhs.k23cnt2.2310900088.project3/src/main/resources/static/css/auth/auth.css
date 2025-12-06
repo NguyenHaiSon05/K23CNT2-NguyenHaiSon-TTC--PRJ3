@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hộp đăng nhập / đăng ký */
+.auth-box {
+    width: 420px;
+    margin: 60px auto;
+    padding: 35px 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.auth-box h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: #2b8a3e; /* xanh chuối đậm */
+}
+
+/* Input */
+.auth-box input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 8px 0 18px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* Nút chính */
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3ebd53; /* xanh chuối */
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.auth-btn:hover {
+    background: #34a746;
+}
+
+/* Link chuyển trang */
+.switch-auth {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.switch-auth a {
+    color: #2e8f47;
+    font-weight: bold;
+}

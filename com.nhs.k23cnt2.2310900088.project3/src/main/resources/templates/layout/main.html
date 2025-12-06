@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">FreshFruit</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header th:replace="layout/header :: header"></header>
+
+<!-- PAGE CONTENT -->
+<main>
+    <div th:replace="${content}"></div>
+</main>
+
+<!-- FOOTER -->
+<footer th:replace="layout/footer :: footer"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

@@ -14,6 +14,9 @@
     <!-- CSS RIÊNG CỦA TRANG HOME -->
     <link rel="stylesheet" th:href="@{/css/home/index.css}">
 
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+
+
     <style>
         .banner img { width: 100%; border-radius: 10px; }
         .service-box { text-align: center; padding: 20px; }
@@ -79,42 +82,74 @@
 <!-- DANH MỤC NỔI BẬT -->
 <div class="container my-5">
 
-    <h2 class="section-title text-center mb-5">
-        Danh Mục <span>Nổi Bật</span>
-    </h2>
+    <h2 class="blink-title">Danh Mục Nổi Bật</h2>
 
-    <div class="row g-4 category-list">
 
+    <div class="category-section">
         <!-- Trái Cây Nhập Khẩu -->
-        <div class="col-md-4">
-            <div class="category-item">
-                <img src="/uploads/danhmuc/danhmuc1.png" alt="">
-                <div class="category-text">Trái Cây Nhập Khẩu</div>
-            </div>
+        <div class="category-box" style="background-image: url('/uploads/danhmuc/danhmuc1.png');">
+            <a href="/products?category=import">
+                <span>Trái Cây Nhập Khẩu</span>
+            </a>
+        </div>
+
+        <!-- Trái Cây Khô -->
+        <div class="category-box" style="background-image: url('/uploads/danhmuc/danhmuc2.png');">
+            <a href="/products?category=dry">
+                <span>Trái Cây Khô</span>
+            </a>
         </div>
 
         <!-- Giỏ Quà Trái Cây -->
-        <div class="col-md-4">
-            <div class="category-item">
-                <img src="/uploads/danhmuc/danhmuc2.png" alt="">
-                <div class="category-text">Giỏ Quà Trái Cây</div>
-            </div>
+        <div class="category-box" style="background-image: url('/uploads/danhmuc/danhmuc3.png');">
+            <a href="/products?category=gift">
+                <span>Giỏ Quà Trái Cây</span>
+            </a>
         </div>
-
-        <!-- Quà Tặng Doanh Nghiệp -->
-        <div class="col-md-4">
-            <div class="category-item">
-                <img src="/uploads/danhmuc/danhmuc3.png" alt="">
-                <div class="category-text">Quà Tặng Doanh Nghiệp</div>
-            </div>
-        </div>
-
     </div>
+
 </div>
 
 
+
+<div class="section-title">
+    <h2>
+        Sản Phẩm <span>Nổi Bật</span>
+    </h2>
+
+    <div class="product-tabs">
+        <a class="active">SẢN PHẨM MỚI NHẤT</a>
+        <a>SẢN PHẨM BÁN CHẠY</a>
+    </div>
+</div>
+
+<div class="product-grid">
+    <div class="product-item">
+        <img src="/uploads/products/giotraicay/sp1.webp" alt="">
+        <h3>Giỏ Quà “Vạn Điều May Mắn”</h3>
+        <p class="price">1,300,000đ</p>
+    </div>
+
+    <div class="product-item">
+        <img src="/uploads/products/giotraicay/sp2.webp" alt="">
+        <h3>Giỏ Quà “Gửi Gắm Niềm Nhớ”</h3>
+        <p class="price">2,500,000đ</p>
+    </div>
+
+    <div class="product-item">
+        <img src="/uploads/products/giotraicay/sp3.webp" alt="">
+        <h3>Giỏ Quà “Sung Túc Đủ Đầy”</h3>
+        <p class="price">1,100,000đ</p>
+    </div>
+
+    <div class="product-item">
+        <img src="/uploads/products/giotraicay/sp4.webp" alt="">
+        <h3>Giỏ Quà “Vị Ngọt Cuộc Sống”</h3>
+        <p class="price">1,200,000đ</p>
+    </div>
+</div>
+
 <!-- FOOTER -->
 <div th:replace="layout/footer :: footer"></div>
-
 </body>
 </html>

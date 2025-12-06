@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/main :: content">
 
-<head>
-    <title>Register</title>
-</head>
+<div class="auth-box">
 
-<body>
+    <h2 class="text-center mb-3">Đăng Ký</h2>
 
-<h2>Đăng ký tài khoản</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post">
 
-<form th:action="@{/register}" method="post" th:object="${user}">
+        <div class="mb-3">
+            <label>Họ tên</label>
+            <input th:field="*{fullname}" class="form-control" required>
+        </div>
 
-    <label>Username:</label>
-    <input type="text" th:field="*{username}">
+        <div class="mb-3">
+            <label>Email</label>
+            <input th:field="*{email}" class="form-control" required>
+        </div>
 
-    <label>Password:</label>
-    <input type="password" th:field="*{password}">
+        <div class="mb-3">
+            <label>Mật khẩu</label>
+            <input type="password" th:field="*{password}" class="form-control" required>
+        </div>
 
-    <label>Họ tên:</label>
-    <input type="text" th:field="*{full_name}">
+        <button class="btn btn-success w-100" type="submit">Tạo tài khoản</button>
+    </form>
 
-    <label>Email:</label>
-    <input type="text" th:field="*{email}">
+</div>
 
-    <label>SĐT:</label>
-    <input type="text" th:field="*{phone}">
-
-    <button type="submit">Đăng ký</button>
-
-</form>
-
-</body>
 </html>

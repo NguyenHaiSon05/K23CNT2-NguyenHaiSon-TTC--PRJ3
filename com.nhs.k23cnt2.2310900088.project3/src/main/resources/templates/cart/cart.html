@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" th:href="@{/css/cart/cart.css}">
 </head>
+
 <body>
+
+<!-- Header -->
+<div th:replace="layout/header :: header"></div>
+
+<div class="cart-container">
+
+    <h2 class="cart-title">GIỎ HÀNG CỦA BẠN</h2>
+
+    <!-- Nếu giỏ hàng trống -->
+    <div class="cart-empty" th:if="${#lists.isEmpty(cartItems)}">
+        <img src="/images/empty-cart.png" class="empty-img">
+        <p>Giỏ hàng của bạn đang trống</p>
+        <a href="/" class="btn-continue">TIẾP TỤC MUA SẮM</a>
+    </div>
+
+    <!-- Nếu có sản phẩm -->
+    <table class="cart-table" th:if="${!#lists.isEmpty(cartItems)}">
+
+        <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="item : ${cartItems}">
+            <td class="cart-product">
+                <img th:src="@{'/uploads/products/' + ${item.product.image}}" class="cart-img">
+                <span th:text="${item.product.name}"></span>
+            </td>
+
+            <td th:text="${item.product.price} + 'đ'"></td>
+
+            <td>
+                <input type="number" min="1" th:value="${item.quantity}">
+            </td>
+
+            <td th:text="${item.quantity * item.product.price} + 'đ'"></td>
+
+            <td>
+                <a th:href="@{'/cart/remove/' + ${item.product.id}}" class="remove-btn">X</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <div class="cart-total" th:if="${!#lists.isEmpty(cartItems)}">
+        Tổng thanh toán:
+        <span th:text="${totalPrice} + 'đ'"></span>
+        <a href="/checkout" class="btn-checkout">THANH TOÁN</a>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div th:replace="layout/footer :: footer"></div>
 
 </body>
 </html>
