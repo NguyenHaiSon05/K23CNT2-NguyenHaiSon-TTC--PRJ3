@@ -124,26 +124,33 @@
 </div>
 
 <div class="product-grid">
+    <div class="product-item" th:each="p : ${latestProducts}">
+        <a th:href="@{'/product/' + ${p.productId}}">
+            <img th:src="@{${p.image}}" alt="" />
+        </a>
+        <h3 th:text="${p.name}"></h3>
+        <p class="price" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"></p>
+    </div>
     <div class="product-item">
-        <img src="/uploads/products/giotraicay/sp1.webp" alt="">
+        <img src="/uploads/products/giotraicay/gio_1.png" alt="">
         <h3>Giỏ Quà “Vạn Điều May Mắn”</h3>
         <p class="price">1,300,000đ</p>
     </div>
 
     <div class="product-item">
-        <img src="/uploads/products/giotraicay/sp2.webp" alt="">
+        <img src="/uploads/products/giotraicay/gio_2.png" alt="">
         <h3>Giỏ Quà “Gửi Gắm Niềm Nhớ”</h3>
         <p class="price">2,500,000đ</p>
     </div>
 
     <div class="product-item">
-        <img src="/uploads/products/giotraicay/sp3.webp" alt="">
+        <img src="/uploads/products/giotraicay/gio_3.png" alt="">
         <h3>Giỏ Quà “Sung Túc Đủ Đầy”</h3>
         <p class="price">1,100,000đ</p>
     </div>
 
     <div class="product-item">
-        <img src="/uploads/products/giotraicay/sp4.webp" alt="">
+        <img src="/uploads/products/giotraicay/gio_4.png" alt="">
         <h3>Giỏ Quà “Vị Ngọt Cuộc Sống”</h3>
         <p class="price">1,200,000đ</p>
     </div>

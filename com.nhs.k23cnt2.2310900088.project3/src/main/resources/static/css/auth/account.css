@@ -1,0 +1,67 @@
+.account-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+}
+
+/* LEFT COLUMN */
+.account-left {
+    width: 25%;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.avatar-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+.account-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.account-menu li {
+    margin: 10px 0;
+}
+
+.account-menu a {
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+}
+
+.account-menu a.logout {
+    color: #c0392b;
+    font-weight: bold;
+}
+
+/* RIGHT COLUMN */
+.account-right {
+    width: 75%;
+}
+
+.account-right h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.account-right p {
+    font-size: 16px;
+    line-height: 1.6;
+}

@@ -1,61 +1,145 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    margin: 0;
-    padding: 0;
+/* =========================================
+   AUTH PAGE (LOGIN + REGISTER ONLY)
+   ========================================= */
+
+/* khoảng cách để card nằm dưới header */
+.auth-section {
+    padding: 80px 0 120px;
+    background: #fff;
 }
 
-/* Hộp đăng nhập / đăng ký */
-.auth-box {
-    width: 420px;
-    margin: 60px auto;
-    padding: 35px 40px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+/* container căn giữa */
+.auth-section .auth-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* card chung */
+.auth-section .auth-card {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* REGISTER – chế độ 1 cột */
+.auth-section .auth-card.single {
+    max-width: 560px;
+    flex-direction: column;
+    padding: 32px;
+}
+
+/* cột trái */
+.auth-section .auth-left {
+    width: 55%;
+    padding: 40px 50px;
+    box-sizing: border-box;
+}
+
+/* cột phải panel xanh */
+.auth-section .auth-right {
+    width: 45%;
+    background: linear-gradient(135deg, #16a085, #13856a);
+    color: white;
     text-align: center;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.auth-box h2 {
-    margin-bottom: 25px;
-    font-size: 22px;
-    color: #2b8a3e; /* xanh chuối đậm */
+/* tiêu đề */
+.auth-section .auth-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 22px;
 }
 
-/* Input */
-.auth-box input {
+/* label */
+.auth-section .lbl {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* input */
+.auth-section .input {
     width: 100%;
-    padding: 12px 14px;
-    margin: 8px 0 18px 0;
+    padding: 13px 14px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 15px;
+    margin-bottom: 18px;
+    box-sizing: border-box;
 }
 
-/* Nút chính */
-.auth-btn {
-    width: 100%;
-    padding: 12px;
-    background: #3ebd53; /* xanh chuối */
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.auth-btn:hover {
-    background: #34a746;
-}
-
-/* Link chuyển trang */
-.switch-auth {
-    margin-top: 18px;
+/* Forgot password + Remember */
+.auth-section .row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
     font-size: 14px;
 }
 
-.switch-auth a {
-    color: #2e8f47;
-    font-weight: bold;
+/* link quên mật khẩu */
+.auth-section .forgot {
+    text-decoration: underline;
+    color: #1a73e8;
 }
+
+/* button chính */
+.auth-section .btn-primary {
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    background: #0b5d59;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* button outline của panel xanh */
+.auth-section .btn-outline {
+    display: inline-block;
+    padding: 12px 36px;
+    border-radius: 40px;
+    border: 2px solid rgba(255,255,255,0.85);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 18px;
+}
+
+/* dòng chuyển link login/register */
+.auth-section .switch-text {
+    margin-top: 18px;
+    text-align: center;
+    color: #333;
+}
+
+/* =============================
+   RESPONSIVE (MOBILE)
+   ============================= */
+@media (max-width: 900px) {
+    .auth-section .auth-card {
+        flex-direction: column;
+    }
+
+    .auth-section .auth-left,
+    .auth-section .auth-right {
+        width: 100%;
+    }
+
+    .auth-section .auth-right {
+        padding: 30px;
+    }
+}
+
+
+

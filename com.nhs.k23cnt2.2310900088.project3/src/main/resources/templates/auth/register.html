@@ -1,31 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      th:replace="layout/main :: content">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Đăng Ký</title>
 
-<div class="auth-box">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/auth/auth.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
 
-    <h2 class="text-center mb-3">Đăng Ký</h2>
+</head>
+<body>
 
-    <form th:action="@{/register}" th:object="${user}" method="post">
+<header th:replace="layout/header :: header"></header>
 
-        <div class="mb-3">
-            <label>Họ tên</label>
-            <input th:field="*{fullname}" class="form-control" required>
+<section class="auth-section">
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <!-- LEFT FORM -->
+            <div class="auth-left">
+                <h2 class="auth-title">Đăng Ký</h2>
+
+                <!-- THÔNG BÁO LỖI -->
+                <div th:if="${error}"
+                     style="color: red; font-size: 14px; margin-bottom: 12px;">
+                    <span th:text="${error}"></span>
+                </div>
+
+                <form th:action="@{/register}" method="post" th:object="${user}">
+
+                    <label class="lbl">Họ và tên *</label>
+                    <input class="input" type="text" th:field="*{fullName}" placeholder="Họ và tên">
+
+                    <label class="lbl">Email *</label>
+                    <input class="input" type="email" th:field="*{email}" placeholder="Email">
+
+                    <label class="lbl">Mật khẩu *</label>
+                    <input class="input" type="password" th:field="*{password}" placeholder="Mật khẩu">
+
+                    <p class="note">Dữ liệu sẽ được bảo mật tuyệt đối.</p>
+
+                    <button class="btn-primary">Đăng Ký</button>
+
+                    <p class="switch-text">
+                        Already a Member?
+                        <a th:href="@{/login}">Đăng Nhập</a>
+                    </p>
+
+                </form>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="auth-right">
+                <h3>Welcome!</h3>
+                <p>Create an account to enjoy all features.</p>
+                <a th:href="@{/login}" class="btn-outline">Đăng Nhập</a>
+            </div>
+
         </div>
 
-        <div class="mb-3">
-            <label>Email</label>
-            <input th:field="*{email}" class="form-control" required>
-        </div>
+    </div>
+</section>
 
-        <div class="mb-3">
-            <label>Mật khẩu</label>
-            <input type="password" th:field="*{password}" class="form-control" required>
-        </div>
+<footer th:replace="layout/footer :: footer"></footer>
 
-        <button class="btn btn-success w-100" type="submit">Tạo tài khoản</button>
-    </form>
-
-</div>
-
+</body>
 </html>

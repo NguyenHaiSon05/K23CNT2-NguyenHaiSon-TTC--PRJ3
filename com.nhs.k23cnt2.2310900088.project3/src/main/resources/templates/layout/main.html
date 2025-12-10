@@ -2,23 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}">FreshFruit</title>
+    <title th:text="${pageTitle}">FreshFruit</title>
 
+    <!-- CSS chung -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- CSS riêng của trang con -->
+    <th:block th:replace="${cssFragment}"></th:block>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header th:replace="layout/header :: header"></header>
 
-<!-- PAGE CONTENT -->
 <main>
-    <div th:replace="${content}"></div>
+    <th:block th:replace="${contentFragment}"></th:block>
 </main>
 
-<!-- FOOTER -->
 <footer th:replace="layout/footer :: footer"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
