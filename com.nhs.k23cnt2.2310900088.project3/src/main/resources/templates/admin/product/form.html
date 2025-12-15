@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form sản phẩm</title>
+</head>
+<body>
+
+<h2 th:text="${product.productId == null ? '➕ Thêm sản phẩm' : '✏️ Sửa sản phẩm'}"></h2>
+
+<form th:action="@{/admin/products/save}"
+      th:object="${product}"
+      method="post"
+      enctype="multipart/form-data">
+
+    <p th:if="${error}" style="color:red; font-weight:bold;">
+        ⚠️ <span th:text="${error}"></span>
+    </p>
+
+
+    <input type="hidden" th:field="*{productId}"/>
+
+    <div>
+        <label>Tên sản phẩm</label><br>
+        <input type="text" th:field="*{name}" required>
+    </div>
+
+    <div>
+        <label>Giá</label><br>
+        <input type="number" th:field="*{price}" required>
+    </div>
+
+    <div>
+        <label>Tồn kho</label><br>
+        <input type="number" th:field="*{stock}">
+    </div>
+
+    <div>
+        <label>Đơn vị</label><br>
+        <select th:field="*{unit}">
+            <option value="kg">kg</option>
+            <option value="hộp">hộp</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Danh mục</label><br>
+
+        <select name="categoryId">
+            <option value="">-- Chọn danh mục --</option>
+
+            <option th:each="c : ${categories}"
+                    th:value="${c.categoryId}"
+                    th:text="${c.name}"
+                    th:selected="${product.category != null
+                              && c.categoryId == product.category.categoryId}">
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label>Ảnh sản phẩm</label><br>
+
+        <input type="file"
+               name="imageFile"
+               accept="image/*"
+               onchange="previewImage(this)">
+
+        <br><br>
+
+        <img id="previewImg"
+             th:src="${product.image != null ? product.image : ''}"
+             th:style="${product.image != null ? 'max-width:200px; border-radius:8px; border:1px solid #ddd'
+                                           : 'display:none; max-width:200px; border-radius:8px; border:1px solid #ddd'}">
+    </div>
+
+
+    <div>
+        <label>Mô tả</label><br>
+        <textarea th:field="*{description}"></textarea>
+    </div>
+
+    <br>
+    <button type="submit">💾 Lưu</button>
+    <a href="/admin/products">⬅ Quay lại</a>
+
+</form>
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById("previewImg");
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+</body>
+</html>

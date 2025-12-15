@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<div th:replace="admin/layout/header :: adminHeader"></div>
+
+<div class="admin-wrapper">
+
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
+
+    <main class="admin-main">
+
+        <div class="admin-card">
+            <h2>Xin chào Admin 👋</h2>
+            <p>Quản trị viên:
+                <b th:text="${adminName}">Admin</b>
+            </p>
+        </div>
+
+        <div class="stat-grid">
+
+            <div class="stat-box">
+                <h4>Tổng sản phẩm</h4>
+                <span th:text="${totalProducts}">0</span>
+            </div>
+
+            <div class="stat-box">
+                <h4>Danh mục</h4>
+                <span th:text="${totalCategories}">0</span>
+            </div>
+
+            <div class="stat-box">
+                <h4>Đơn hàng</h4>
+                <span th:text="${totalOrders}">0</span>
+            </div>
+
+            <div class="stat-box">
+                <h4>Doanh thu</h4>
+                <span th:text="${#numbers.formatDecimal(totalRevenue,0,'COMMA',0,'POINT')} + ' đ'">
+            0 đ
+        </span>
+            </div>
+
+        </div>
+
+
+
+    </main>
+</div>
+
+</body>
+</html>

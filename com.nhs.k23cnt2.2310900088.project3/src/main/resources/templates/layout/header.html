@@ -24,7 +24,7 @@
 
 
             <a href="/" class="header-logo d-flex align-items-center text-decoration-none">
-                <img src="/uploads/logo.png" class="logo-img" alt="logo">
+                <img src="/image/logo.png" class="logo-img" alt="logo">
                 <h2 class="logo-text m-0">Fresh Fruit</h2>
             </a>
 
@@ -65,10 +65,13 @@
 
                 <a href="/cart" class="text-dark position-relative">
                     <i class="fas fa-shopping-bag fs-4"></i>
-                    <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                    <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                          th:text="${cartCount}">
                         0
                     </span>
                 </a>
+
 
             </div>
         </div>
@@ -95,53 +98,51 @@
                         <div class="dropdown-menu mega-menu">
                             <div class="menu-column">
                                 <h4>THEO NHU CẦU</h4>
-                                <a href="#">Quà Chúc Mừng</a>
-                                <a href="#">Quà Chia Buồn</a>
-                                <a href="#">Tặng Cha Mẹ</a>
-                                <a href="#">Tặng Người Yêu</a>
+                                <a href="/products?need=chuc-mung">Quà Chúc Mừng</a>
+                                <a href="/products?need=chia-buon">Quà Chia Buồn</a>
+                                <a href="/products?need=cha-me">Tặng Cha Mẹ</a>
+                                <a href="/products?need=nguoi-yeu">Tặng Người Yêu</a>
                             </div>
 
                             <div class="menu-column">
                                 <h4>THEO NGÂN SÁCH</h4>
-                                <a href="#">Dưới 1Tr</a>
-                                <a href="#">1Tr – 2Tr</a>
-                                <a href="#">2Tr – 3Tr</a>
-                                <a href="#">Trên 3.000.000đ</a>
+                                <a href="/products?need=duoi-1tr">Dưới 1Tr</a>
+                                <a href="/products?need=1-2tr">1Tr – 2Tr</a>
+                                <a href="/products?need=2-3tr">2Tr – 3Tr</a>
+                                <a href="/products?need=tren-3tr">Trên 3.000.000đ</a>
                             </div>
 
                             <div class="menu-column">
                                 <h4>LOẠI HÌNH</h4>
-                                <a href="#">Giỏ Trái Cây + Hoa Tươi</a>
-                                <a href="#">Giỏ Trái Cây + Rượu</a>
-                                <a href="#">Khay Trái Cây</a>
-                                <a href="#">GIFT BOX</a>
+                                <a href="/products?need=hoa-tuoi">Giỏ Trái Cây + Hoa Tươi</a>
+                                <a href="/products?need=ruou">Giỏ Trái Cây + Rượu</a>
                             </div>
 
                             <div class="menu-column">
                                 <h4>QUÀ LỄ & TẾT</h4>
-                                <a href="#">Quà Trung Thu</a>
-                                <a href="#">Quà Tặng 8/3</a>
-                                <a href="#">Quà Tặng Tết</a>
-                                <a href="#">Quà Tặng 20/11</a>
+                                <a href="/products?need=8-3">Quà Tặng 8/3</a>
+                                <a href="/products?need=tet">Quà Tặng Tết</a>
+                                <a href="/products?need=20-11">Quà Tặng 20/11</a>
                             </div>
                         </div>
                     </li>
 
                     <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">GIỎ QUÀ TRÁI CÂY</a>
+                        <a class="nav-link" href="/products?category=gift">GIỎ QUÀ TRÁI CÂY</a>
                     </li>
 
                     <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">TRÁI CÂY NỘI ĐỊA</a>
+                        <a class="nav-link" href="/products?category=domestic">TRÁI CÂY NỘI ĐỊA</a>
                     </li>
 
                     <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">TRÁI CÂY NHẬP KHẨU</a>
+                        <a class="nav-link" href="/products?category=import">TRÁI CÂY NHẬP KHẨU</a>
                     </li>
 
                     <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">TRÁI CÂY KHÔ</a>
+                        <a class="nav-link" href="/products?category=dry">TRÁI CÂY KHÔ</a>
                     </li>
+
 
                     <li class="nav-item mx-3">
                         <a class="nav-link" href="#">GIỚI THIỆU</a>

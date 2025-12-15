@@ -1,7 +1,7 @@
 package com.freshfruit.nhscontroller;
 
 import com.freshfruit.nhsentity.Product;
-import com.freshfruit.nhsservice.ProductService;   // ⭐ THÊM DÒNG NÀY ⭐
+import com.freshfruit.nhsservice.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +20,11 @@ public class HomeController {
 
         List<Product> latestProducts = productService.getLatestProducts();
 
-        model.addAttribute("latestProducts", latestProducts);
+        model.addAttribute("latestProducts", productService.getLatestProducts());
+        model.addAttribute("bestSellerProducts", productService.getBestSellerProducts());
+
 
         return "home/index";
     }
+
 }

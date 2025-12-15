@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Giỏ Hàng</title>
     <link rel="stylesheet" th:href="@{/css/cart/cart.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
 </head>
 
 <body>
@@ -16,52 +17,54 @@
 
     <h2 class="cart-title">GIỎ HÀNG CỦA BẠN</h2>
 
-    <!-- Nếu giỏ hàng trống -->
+    <!-- Giỏ trống -->
     <div class="cart-empty" th:if="${#lists.isEmpty(cartItems)}">
-        <img src="/images/empty-cart.png" class="empty-img">
         <p>Giỏ hàng của bạn đang trống</p>
         <a href="/" class="btn-continue">TIẾP TỤC MUA SẮM</a>
     </div>
 
-    <!-- Nếu có sản phẩm -->
+    <!-- Có sản phẩm -->
     <table class="cart-table" th:if="${!#lists.isEmpty(cartItems)}">
-
         <thead>
         <tr>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Tổng</th>
-            <th></th>
+            <th class="col-product">Sản phẩm</th>
+            <th class="col-price">Giá</th>
+            <th class="col-qty">Số lượng</th>
+            <th class="col-total">Tổng</th>
+            <th class="col-remove">Xóa</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="item : ${cartItems}">
-            <td class="cart-product">
-                <img th:src="@{'/uploads/products/' + ${item.product.image}}" class="cart-img">
-                <span th:text="${item.product.name}"></span>
+        <tr class="cart-row" th:each="item : ${cartItems}">
+            <!-- Cột Sản phẩm -->
+            <td>
+                <div class="product-box">
+                    <img th:src="@{${item.product.image}}" class="cart-img">
+                    <span th:text="${item.product.name}"></span>
+                </div>
             </td>
 
-            <td th:text="${item.product.price} + 'đ'"></td>
+            <!-- Cột Giá -->
+            <td class="price" th:text="${item.product.price} + 'đ'"></td>
 
-            <td>
-                <input type="number" min="1" th:value="${item.quantity}">
+            <td class="qty">
+                <input type="number" min="1" th:value="${item.quantity}" class="qty-input">
             </td>
 
-            <td th:text="${item.quantity * item.product.price} + 'đ'"></td>
+            <td class="total" th:text="${item.quantity * item.product.price} + 'đ'"></td>
 
-            <td>
-                <a th:href="@{'/cart/remove/' + ${item.product.id}}" class="remove-btn">X</a>
+            <td class="remove">
+                <a th:href="@{'/cart/remove/' + ${item.product.productId}}" class="remove-btn">×</a>
             </td>
         </tr>
         </tbody>
-
     </table>
 
+    <!-- Tổng -->
     <div class="cart-total" th:if="${!#lists.isEmpty(cartItems)}">
-        Tổng thanh toán:
-        <span th:text="${totalPrice} + 'đ'"></span>
+        <span>Tổng thanh toán:</span>
+        <span class="total-price" th:text="${totalPrice} + 'đ'"></span>
         <a href="/checkout" class="btn-checkout">THANH TOÁN</a>
     </div>
 

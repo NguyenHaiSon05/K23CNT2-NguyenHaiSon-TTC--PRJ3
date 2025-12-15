@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách sản phẩm</title>
+    <title>Quản lý sản phẩm</title>
 </head>
 <body>
 
-<h1>Danh sách sản phẩm</h1>
+<h2>📦 Quản lý sản phẩm</h2>
 
-<a href="/admin/products/add">+ Thêm sản phẩm</a>
+<a href="/admin/products/create">➕ Thêm sản phẩm</a>
 
 <table border="1" cellpadding="10">
     <tr>
         <th>ID</th>
         <th>Tên</th>
         <th>Giá</th>
-        <th>Ảnh</th>
+        <th>Tồn kho</th>
         <th>Danh mục</th>
         <th>Hành động</th>
     </tr>
@@ -23,12 +23,13 @@
         <td th:text="${p.productId}"></td>
         <td th:text="${p.name}"></td>
         <td th:text="${p.price}"></td>
-        <td><img th:src="${p.image}" width="80"></td>
+        <td th:text="${p.stock}"></td>
         <td th:text="${p.category.name}"></td>
         <td>
-            <a th:href="@{'/admin/products/edit/' + ${p.productId}}">Sửa</a> |
-            <a th:href="@{'/admin/products/delete/' + ${p.productId}}"
-               onclick="return confirm('Xóa sản phẩm?')">Xóa</a>
+            <a th:href="@{/admin/products/edit/{id}(id=${p.productId})}">✏️ Sửa</a>
+            |
+            <a th:href="@{/admin/products/delete/{id}(id=${p.productId})}"
+               onclick="return confirm('Xóa sản phẩm này?')">🗑 Xóa</a>
         </td>
     </tr>
 

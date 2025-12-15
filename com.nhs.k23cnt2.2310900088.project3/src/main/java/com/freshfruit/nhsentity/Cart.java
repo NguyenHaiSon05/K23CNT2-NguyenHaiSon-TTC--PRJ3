@@ -10,10 +10,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cartId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 

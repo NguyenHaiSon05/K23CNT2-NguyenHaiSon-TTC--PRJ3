@@ -1,28 +1,28 @@
 package com.freshfruit.nhsutil;
 
 import org.springframework.web.multipart.MultipartFile;
-import java.io.*;
-import java.nio.file.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 public class FileUploadUtil {
 
-    public static String saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
+    public static String saveFile(String uploadDir, MultipartFile file) throws IOException {
 
-        Path uploadPath = Paths.get(uploadDir);
-
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
+        // ✅ Tạo thư mục nếu chưa tồn tại
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
 
-        try (InputStream inputStream = multipartFile.getInputStream()) {
+        // ✅ Đặt tên file an toàn
+        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        File dest = new File(dir, fileName);
 
-            return fileName;
+        file.transferTo(dest);
 
-        } catch (IOException ioe) {
-            throw new IOException("Không thể lưu file ảnh: " + fileName, ioe);
-        }
+        return fileName;
     }
 }

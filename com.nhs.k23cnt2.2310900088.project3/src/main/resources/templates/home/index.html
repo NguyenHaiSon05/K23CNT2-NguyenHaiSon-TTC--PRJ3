@@ -29,7 +29,7 @@
 <!-- HEADER -->
 <div th:replace="layout/header :: header"></div>
 
-<!-- Swiper Banner giống VinFruits -->
+<!-- Swiper Banner  -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 
@@ -38,15 +38,15 @@
     <div class="swiper-wrapper">
 
         <div class="swiper-slide">
-            <img src="/uploads/banner/banner1.png" alt="banner1">
+            <img src="/image/banner/banner1.png" alt="banner1">
         </div>
 
         <div class="swiper-slide">
-            <img src="/uploads/banner/banner2.png" alt="banner2">
+            <img src="/image/banner/banner2.png" alt="banner2">
         </div>
 
         <div class="swiper-slide">
-            <img src="/uploads/banner/banner3.png" alt="banner3">
+            <img src="/image/banner/banner3.png" alt="banner3">
         </div>
 
     </div>
@@ -118,43 +118,63 @@
     </h2>
 
     <div class="product-tabs">
-        <a class="active">SẢN PHẨM MỚI NHẤT</a>
-        <a>SẢN PHẨM BÁN CHẠY</a>
+        <a class="tab active" data-tab="new">SẢN PHẨM MỚI NHẤT</a>
+        <a class="tab" data-tab="best">SẢN PHẨM BÁN CHẠY</a>
     </div>
+
 </div>
 
-<div class="product-grid">
+<!-- SẢN PHẨM MỚI NHẤT -->
+<div id="new" class="product-grid tab-content active">
     <div class="product-item" th:each="p : ${latestProducts}">
         <a th:href="@{'/product/' + ${p.productId}}">
             <img th:src="@{${p.image}}" alt="" />
         </a>
         <h3 th:text="${p.name}"></h3>
-        <p class="price" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"></p>
-    </div>
-    <div class="product-item">
-        <img src="/uploads/products/giotraicay/gio_1.png" alt="">
-        <h3>Giỏ Quà “Vạn Điều May Mắn”</h3>
-        <p class="price">1,300,000đ</p>
-    </div>
+        <p class="price"
+           th:text="${#numbers.formatDecimal(p.price,0,'COMMA',0,'POINT')}
+           + 'đ / ' + ${p.unit}">
+        </p>
 
-    <div class="product-item">
-        <img src="/uploads/products/giotraicay/gio_2.png" alt="">
-        <h3>Giỏ Quà “Gửi Gắm Niềm Nhớ”</h3>
-        <p class="price">2,500,000đ</p>
-    </div>
-
-    <div class="product-item">
-        <img src="/uploads/products/giotraicay/gio_3.png" alt="">
-        <h3>Giỏ Quà “Sung Túc Đủ Đầy”</h3>
-        <p class="price">1,100,000đ</p>
-    </div>
-
-    <div class="product-item">
-        <img src="/uploads/products/giotraicay/gio_4.png" alt="">
-        <h3>Giỏ Quà “Vị Ngọt Cuộc Sống”</h3>
-        <p class="price">1,200,000đ</p>
     </div>
 </div>
+
+<!-- SẢN PHẨM BÁN CHẠY -->
+<div id="best" class="product-grid tab-content">
+    <div class="product-item" th:each="p : ${bestSellerProducts}">
+        <a th:href="@{'/product/' + ${p.productId}}">
+            <img th:src="@{${p.image}}" alt="" />
+        </a>
+        <h3 th:text="${p.name}"></h3>
+        <p class="price"
+           th:text="${#numbers.formatDecimal(p.price,0,'COMMA',0,'POINT')}
+           + 'đ / ' + ${p.unit}">
+        </p>
+
+    </div>
+    <script>
+        document.querySelectorAll(".tab").forEach(tab => {
+            tab.addEventListener("click", () => {
+
+                // Đổi trạng thái active cho tab
+                document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+
+                // Lấy tab id
+                let tabId = tab.dataset.tab;
+
+                // Ẩn tất cả nội dung
+                document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+                // Hiện đúng tab được chọn
+                document.getElementById(tabId).classList.add("active");
+            });
+        });
+    </script>
+</div>
+
+
+
 
 <!-- FOOTER -->
 <div th:replace="layout/footer :: footer"></div>

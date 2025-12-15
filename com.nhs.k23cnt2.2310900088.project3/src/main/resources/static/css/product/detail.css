@@ -1,0 +1,17 @@
+.add-to-cart-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #34c759);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #218838, #2ebf52);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.18);
+}

@@ -1,0 +1,14 @@
+<header xmlns:th="http://www.thymeleaf.org"
+        th:fragment="adminHeader"
+        class="admin-header">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3>ADMIN PANEL – FreshFruit</h3>
+
+        <div>
+            👤 <span th:text="${adminName}">Admin</span>
+            |
+            <a th:href="@{/logout}" style="color:white;text-decoration:none">Đăng xuất</a>
+        </div>
+    </div>
+</header>

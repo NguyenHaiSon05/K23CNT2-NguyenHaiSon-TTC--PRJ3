@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<!-- HEADER -->
+<div th:replace="admin/layout/header :: adminHeader"></div>
+
+<div style="display:flex">
+
+    <!-- SIDEBAR -->
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
+
+    <!-- MAIN CONTENT -->
+    <main style="flex:1; padding:20px">
+        <h2>Xin chào Admin 👋</h2>
+        <p>Quản trị viên:
+            <b th:text="${adminName}">Admin</b>
+        </p>
+    </main>
+
+</div>
+
+</body>
+</html>

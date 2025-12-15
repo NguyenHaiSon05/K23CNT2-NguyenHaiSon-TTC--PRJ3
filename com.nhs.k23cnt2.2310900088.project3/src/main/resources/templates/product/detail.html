@@ -11,6 +11,7 @@
         .price { color: #e74c3c; font-size: 24px; font-weight: bold; }
     </style>
     <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/product/detail.css}">
 </head>
 
 <body>
@@ -40,8 +41,19 @@
                 <span th:text="${product.stock}"></span>
             </p>
 
-            <button class="btn btn-success btn-lg">Thêm vào giỏ</button>
+            <!-- Thông báo -->
+            <div th:if="${success}" class="alert alert-success mt-3" th:text="${success}"></div>
+            <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+
+            <!-- Nút thêm vào giỏ -->
+            <a th:href="@{/cart/add/{id}(id=${product.productId})}"
+               class="add-to-cart-btn">
+                Thêm vào giỏ
+            </a>
+
+
         </div>
+
 
     </div>
 </div>

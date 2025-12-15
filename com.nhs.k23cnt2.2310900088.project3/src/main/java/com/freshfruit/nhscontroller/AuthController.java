@@ -57,7 +57,18 @@ public class AuthController {
 
         // 4️⃣ Login thành công
         session.setAttribute("loggedUser", dbUser);
+
+        // ✅ PHÂN QUYỀN SAU KHI LOGIN
+        if (dbUser.getRole() != null &&
+                "ADMIN".equals(dbUser.getRole().getRoleName())) {
+
+            return "redirect:/admin";
+        }
+
+        // USER thường
         return "redirect:/";
+
+
     }
 
 
@@ -128,6 +139,8 @@ public class AuthController {
         model.addAttribute("user", loggedUser);
         return "auth/account";
     }
+
+
 
 
 }

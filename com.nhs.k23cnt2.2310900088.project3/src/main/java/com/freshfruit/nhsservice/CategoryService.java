@@ -1,11 +1,26 @@
 package com.freshfruit.nhsservice;
 
 import com.freshfruit.nhsentity.Category;
+import com.freshfruit.nhsrepository.CategoryRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public interface CategoryService {
-    List<Category> getAllCategories();
-    Category getCategoryById(Integer id);
-    Category saveCategory(Category category);
-    void deleteCategory(Integer id);
+@Service
+public class CategoryService {
+
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    public List<Category> getAll() {
+        return categoryRepository.findAll();
+    }
+
+    public Category getById(Integer id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
 }
+
