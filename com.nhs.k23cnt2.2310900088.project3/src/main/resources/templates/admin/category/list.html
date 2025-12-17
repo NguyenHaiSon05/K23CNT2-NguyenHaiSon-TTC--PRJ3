@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách danh mục</title>
+    <title>Quản lý danh mục</title>
 </head>
 <body>
 
-<h1>Danh sách danh mục</h1>
+<h2>Quản lý danh mục</h2>
 
-<a href="/admin/categories/add">+ Thêm danh mục</a>
+<a th:href="@{/admin/categories/create}">➕ Thêm danh mục</a>
 
 <table border="1" cellpadding="10">
     <tr>
         <th>ID</th>
-        <th>Tên danh mục</th>
+        <th>Tên</th>
         <th>Mô tả</th>
         <th>Hành động</th>
     </tr>
 
-    <tr th:each="cat : ${categories}">
-        <td th:text="${cat.categoryId}"></td>
-        <td th:text="${cat.name}"></td>
-        <td th:text="${cat.description}"></td>
+    <tr th:each="c : ${categories}">
+        <td th:text="${c.categoryId}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.description}"></td>
         <td>
-            <a th:href="@{'/admin/categories/edit/' + ${cat.categoryId}}">Sửa</a> |
-            <a th:href="@{'/admin/categories/delete/' + ${cat.categoryId}}"
-               onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
+            <a th:href="@{/admin/categories/edit/{id}(id=${c.categoryId})}">✏️ Sửa</a>
+            |
+            <a th:href="@{/admin/categories/delete/{id}(id=${c.categoryId})}"
+               onclick="return confirm('Xóa danh mục này?')">🗑 Xóa</a>
         </td>
     </tr>
 

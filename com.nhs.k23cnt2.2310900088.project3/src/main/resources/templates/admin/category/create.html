@@ -2,18 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sửa danh mục</title>
+    <title>Thêm danh mục</title>
 </head>
 <body>
 
-<h2>Sửa danh mục</h2>
+<h2>Thêm danh mục</h2>
 
 <form th:action="@{/admin/categories/save}" th:object="${category}" method="post">
 
-    <input type="hidden" th:field="*{categoryId}">
-
     <label>Tên danh mục</label>
-    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{name}" required>
 
     <br><br>
 
@@ -22,7 +20,7 @@
 
     <br><br>
 
-    <button type="submit">Cập nhật</button>
+    <button type="submit">Lưu</button>
 </form>
 
 </body>

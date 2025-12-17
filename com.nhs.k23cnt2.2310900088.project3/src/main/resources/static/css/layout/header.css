@@ -1,8 +1,8 @@
 
 /*  LOGO  */
 .logo-img {
-    width: 120px;
-    height: 80px;
+    width: 110px;
+    height: 70px;
     object-fit: contain;
     margin-right: 2px;
 }
@@ -12,12 +12,13 @@
 
 /* Chữ */
 .logo-text {
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 800;
     color: #1f8c5c;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 1px;
     margin-left: 10px;
+    animation: colorPulse 1.2s infinite;
 }
 
 
@@ -103,13 +104,6 @@
 .dropdown:hover .dropdown-toggle-custom i {
     transform: rotate(180deg);
 }
-/*Logo nhap nhay*/
-.logo-text {
-    font-size: 40px;
-    font-weight: 800;
-    color: #1f8c5c;
-    animation: colorPulse 1.2s infinite;
-}
 
 @keyframes colorPulse {
     0% { color: #1f8c5c; }
@@ -147,6 +141,14 @@
     width: 100%;
 }
 
+/* ICON MẠNG XÃ HỘI MÀU ĐEN */
+.header-social a {
+    color: #000 !important;   /* màu đen */
+}
+
+.header-social a i {
+    color: #000 !important;
+}
 
 
 
