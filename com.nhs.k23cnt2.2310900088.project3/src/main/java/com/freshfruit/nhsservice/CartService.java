@@ -114,6 +114,19 @@ public class CartService {
                 .sum();
     }
 
+    @Transactional
+    public void clearCart(Cart cart) {
+        cart.getItems().clear();
+    }
+    @Transactional
+    public void clearCart(Integer userId) {
+        Cart cart = getCartByUser(userId);
+        if (cart != null) {
+            cart.getItems().clear();
+        }
+    }
+
+
 
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt hàng thành công</title>
+
+    <link rel="stylesheet" th:href="@{/css/checkout/success.css}">
+</head>
+<body>
+
+<!-- Header -->
+<div th:replace="layout/header :: header"></div>
+
+<div class="success-container">
+
+    <div class="success-box">
+        <div class="success-icon">🎉</div>
+
+        <h1>ĐẶT HÀNG THÀNH CÔNG</h1>
+
+        <p>
+            Cảm ơn bạn đã mua hàng tại <b>Fresh Fruit</b> 🍎🍊
+            <br>
+            Đơn hàng của bạn đang được xử lý.
+        </p>
+
+        <div class="success-actions">
+            <a th:href="@{/}" class="btn btn-home">🏠 Về trang chủ</a>
+            <a th:href="@{/products}" class="btn btn-shop">🛒 Tiếp tục mua sắm</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<!--<div th:replace="layout/footer :: footer"></div>-->
+
+</body>
+</html>

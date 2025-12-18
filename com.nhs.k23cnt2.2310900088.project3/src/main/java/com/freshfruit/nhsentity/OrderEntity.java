@@ -7,23 +7,31 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class OrderEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String fullName;
+    private String phone;
+    private String address;
+    private String note;
+
+    private String paymentMethod;
+    private Double totalAmount;
+
+    private String status;
+
+    private LocalDateTime createdAt;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
-
-    private Double totalAmount;
-    private String paymentMethod;
-    private String status; // PLACED, PROCESSING, SHIPPING, COMPLETED, CANCELED
-
-    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
 }
+

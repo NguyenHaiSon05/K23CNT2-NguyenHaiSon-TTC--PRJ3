@@ -30,28 +30,80 @@
         </div>
 
         <ul class="account-menu">
-            <li><a href="#">Đơn Hàng</a></li>
-            <li><a href="#">Địa Chỉ</a></li>
-            <li><a href="#">Tài Khoản</a></li>
-            <li><a href="/logout" class="logout">Đăng xuất</a></li>
+            <li>
+                <a th:href="@{/account/orders}"
+                   th:classappend="${section == 'orders'} ? 'active'">
+                    Đơn Hàng
+                </a>
+            </li>
+
+            <li>
+                <a th:href="@{/account/address}"
+                   th:classappend="${section == 'address'} ? 'active'">
+                    Địa Chỉ
+                </a>
+            </li>
+
+            <li>
+                <a th:href="@{/account/profile}"
+                   th:classappend="${section == 'profile'} ? 'active'">
+                    Tài Khoản
+                </a>
+            </li>
+
+            <li>
+                <a th:href="@{/logout}" class="logout">
+                    Đăng xuất
+                </a>
+            </li>
         </ul>
+
     </div>
 
-    <!-- CỘT PHẢI -->
-    <div class="account-right">
-        <h2>MY ACCOUNT</h2>
 
-        <p>
-            Từ bảng điều khiển tài khoản của bạn, bạn có thể xem các
-            <a href="#">đơn hàng gần đây</a>, quản lý
-            <a href="#">địa chỉ giao hàng và thanh toán</a>,
-            và <a href="#">chỉnh sửa mật khẩu và chi tiết tài khoản</a>.
+    <div th:if="${section == 'orders'}">
+
+        <h2>ĐƠN HÀNG CỦA TÔI</h2>
+
+        <table class="order-table">
+            <thead>
+            <tr>
+                <th>Mã đơn</th>
+                <th>Ngày đặt</th>
+                <th>Thanh toán</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="o : ${orders}">
+                <td>
+                    <a th:href="@{'/account/orders/' + ${o.orderId}}">
+                        #<span th:text="${o.orderId}"></span>
+                    </a>
+                </td>
+                <td th:text="${#temporals.format(o.createdAt,'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${o.paymentMethod}"></td>
+                <td th:text="${o.totalAmount} + 'đ'"></td>
+                <td>
+                <span class="status"
+                      th:text="${o.status}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p th:if="${orders.size() == 0}">
+            Bạn chưa có đơn hàng nào.
         </p>
+
     </div>
+
 
 </div>
+<!--footer-->
 
-<footer th:replace="layout/footer :: footer"></footer>
 
 </body>
 </html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/checkout/checkout.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+</head>
+<body>
+
+<div th:replace="layout/header :: header"></div>
+
+<form th:action="@{/checkout/place-order}" method="post">
+
+    <div class="checkout-container">
+
+        <!-- ===== CỘT TRÁI ===== -->
+        <div class="checkout-left checkout-box">
+
+            <h3>Thông tin khách hàng</h3>
+
+            <div class="form-group">
+                <label>Họ và tên</label>
+                <input type="text" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Số điện thoại</label>
+                <input type="text" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Địa chỉ giao hàng</label>
+                <input type="text" name="address" required>
+            </div>
+
+            <h3>Ghi chú đơn hàng</h3>
+            <div class="form-group">
+                <textarea name="note" placeholder="Ghi chú cho người bán..."></textarea>
+            </div>
+
+            <h3>Phương thức thanh toán</h3>
+            <div class="payment-method">
+                <label>
+                    <input type="radio" name="paymentMethod" value="COD" checked>
+                    Thanh toán khi nhận hàng (COD)
+                </label>
+
+                <label>
+                    <input type="radio" name="paymentMethod" value="BANK">
+                    Chuyển khoản ngân hàng
+                </label>
+            </div>
+
+        </div>
+
+        <!-- ===== CỘT PHẢI ===== -->
+        <div class="checkout-right checkout-box">
+
+            <h3>Đơn hàng của bạn</h3>
+
+            <table class="order-table">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                </tr>
+
+                <tr th:each="item : ${cart.items}">
+                    <td th:text="${item.product.name}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.quantity * item.product.price} + 'đ'"></td>
+                </tr>
+            </table>
+
+            <div class="summary-row">
+                <span>Tạm tính</span>
+                <span th:text="${total} + 'đ'"></span>
+            </div>
+
+            <div class="summary-row" th:if="${discount > 0}">
+                <span>Giảm giá</span>
+                <span th:text="${discount} + '%'"></span>
+            </div>
+
+            <div class="summary-row summary-total">
+                <span>Tổng thanh toán</span>
+                <span th:text="${finalTotal} + 'đ'"></span>
+            </div>
+
+            <!-- 🔥 NÚT SUBMIT ĐÚNG -->
+            <button type="submit" class="btn-order">
+                ĐẶT HÀNG
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>
