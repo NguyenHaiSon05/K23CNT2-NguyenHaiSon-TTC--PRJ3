@@ -47,19 +47,40 @@
 
             <!-- Cột Giá -->
             <td class="price" th:text="${item.product.price} + 'đ'"></td>
-
+            <!--Số lượng-->
             <td class="qty">
-                <input type="number" min="1" th:value="${item.quantity}" class="qty-input">
+                <form th:action="@{/cart/update}" method="post">
+                    <input type="hidden" name="itemId" th:value="${item.id}">
+                    <input type="number"
+                           name="quantity"
+                           min="1"
+                           th:value="${item.quantity}"
+                           onchange="this.form.submit()"
+                           class="qty-input">
+                </form>
             </td>
+
 
             <td class="total" th:text="${item.quantity * item.product.price} + 'đ'"></td>
 
             <td class="remove">
-                <a th:href="@{'/cart/remove/' + ${item.product.productId}}" class="remove-btn">×</a>
+                <a th:href="@{'/cart/remove/' + ${item.id}}"
+                   onclick="return confirm('Xóa sản phẩm này?')"
+                   class="remove-btn">×</a>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <form th:action="@{/apply-coupon}" method="post" class="coupon-form">
+        <input type="text" name="code" placeholder="Nhập mã giảm giá">
+        <button type="submit">Áp dụng</button>
+    </form>
+
+    <p th:if="${discount > 0}">
+        🎉 Đã giảm: <b th:text="${discount}"></b> %
+    </p>
+
 
     <!-- Tổng -->
     <div class="cart-total" th:if="${!#lists.isEmpty(cartItems)}">
@@ -71,7 +92,7 @@
 </div>
 
 <!-- Footer -->
-<div th:replace="layout/footer :: footer"></div>
+
 
 </body>
 </html>

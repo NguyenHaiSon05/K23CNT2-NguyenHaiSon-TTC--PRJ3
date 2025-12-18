@@ -11,6 +11,7 @@ import com.freshfruit.nhsrepository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,18 +60,40 @@ public class CartService {
     }
 
     // Xóa sản phẩm khỏi giỏ
-    public void removeItem(Integer userId, Integer productId) {
-        Cart cart = getCartByUser(userId);
-        if (cart == null) return;
+    @Transactional
+    public void removeItemByItemId(Integer itemId) {
 
-        Product product = productRepo.findById(productId).orElse(null);
-        if (product == null) return;
+        CartItem item = cartItemRepo.findById(itemId).orElse(null);
+        if (item == null) return;
 
-        CartItem item = cartItemRepo.findByCartAndProduct(cart, product);
-        if (item != null) {
-            cartItemRepo.delete(item);
+        Cart cart = item.getCart();
+
+        // 🔥 XÓA KHỎI LIST (QUAN TRỌNG)
+        cart.getItems().remove(item);
+
+        // 🔥 Hibernate tự xóa DB nhờ orphanRemoval = true
+    }
+
+
+    @Transactional
+    public void updateQuantity(Integer itemId, Integer quantity) {
+
+        CartItem item = cartItemRepo.findById(itemId).orElse(null);
+        if (item == null) return;
+
+        if (quantity <= 0) {
+            // nếu nhập 0 → xóa luôn
+            item.getCart().getItems().remove(item);
+        } else {
+            item.setQuantity(quantity);
         }
     }
+
+
+
+
+
+
 
     // Tính tổng tiền
     public int getTotalPrice(Cart cart) {

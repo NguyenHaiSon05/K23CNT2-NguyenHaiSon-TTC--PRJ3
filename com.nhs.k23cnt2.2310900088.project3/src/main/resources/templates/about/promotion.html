@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Khuyến mãi - Fresh Fruit</title>
+    <link rel="stylesheet" th:href="@{/css/about/promotion.css}">
+</head>
+
+<body>
+
+<!-- Header -->
+<div th:replace="layout/header :: header"></div>
+
+<!-- Banner -->
+<section class="promo-banner">
+    <h1>KHUYẾN MÃI ĐẶC BIỆT</h1>
+    <p>Tiết kiệm chi phí – Mua sắm trái cây tươi mỗi ngày</p>
+</section>
+
+<!-- Giới thiệu -->
+<section class="promo-intro">
+    <h2>🎁 Chương trình khuyến mãi tại Fresh Fruit</h2>
+    <p>
+        Fresh Fruit mang đến nhiều ưu đãi hấp dẫn dành cho khách hàng thân thiết.
+        Các mã giảm giá có thể áp dụng trực tiếp tại trang giỏ hàng khi thanh toán.
+    </p>
+    <p>
+        ⏰ Mỗi mã đều có thời hạn sử dụng – hãy nhanh tay!
+    </p>
+</section>
+
+<!-- Danh sách mã giảm giá -->
+<section class="promo-list">
+    <h2>💸 Mã giảm giá hiện có</h2>
+
+    <div class="coupon-box" th:each="c : ${coupons}">
+        <div class="coupon-code" th:text="${c.code}"></div>
+        <div class="coupon-info">
+            <p>Giảm <b th:text="${c.discountPercent}"></b>%</p>
+            <p>
+                Thời hạn:
+                <span th:text="${c.startDate}"></span>
+                -
+                <span th:text="${c.endDate}"></span>
+            </p>
+        </div>
+    </div>
+
+    <p th:if="${#lists.isEmpty(coupons)}">
+        Hiện chưa có chương trình khuyến mãi nào 😢
+    </p>
+</section>
+
+
+</body>
+</html>

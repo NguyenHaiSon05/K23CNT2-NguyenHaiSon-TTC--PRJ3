@@ -1,0 +1,66 @@
+/* Tổng thể */
+.about-page {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #333;
+}
+
+/* Banner */
+.about-hero {
+    background: linear-gradient(135deg, #1f8c5c, #34c98a);
+    color: white;
+    padding: 40px 0;
+}
+
+.about-hero h1 {
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.about-hero p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Section chung */
+.about-section {
+    padding: 60px 0;
+}
+
+.about-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #1f8c5c;
+}
+
+/* Highlight */
+.about-highlight {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.highlight-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    height: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.highlight-box h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #2eb872;
+}
+
+/* Danh sách dịch vụ */
+.service-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-list li {
+    font-size: 18px;
+    margin-bottom: 12px;
+}

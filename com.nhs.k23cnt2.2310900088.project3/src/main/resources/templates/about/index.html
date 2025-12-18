@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Giới thiệu - Fresh Fruit</title>
+
+    <!-- CSS riêng cho trang Giới thiệu -->
+    <link rel="stylesheet" th:href="@{/css/about/index.css}">
+</head>
+
+
+<body>
+
+<!-- HEADER -->
+<div th:replace="layout/header :: header"></div>
+
+<!-- NỘI DUNG GIỚI THIỆU -->
+<div th:fragment="content" class="about-page">
+
+    <!-- Banner -->
+    <section class="about-hero">
+        <div class="container text-center">
+            <h1>Fresh Fruit</h1>
+            <p>Trái cây tươi sạch – Chất lượng – Uy tín</p>
+        </div>
+    </section>
+
+    <!-- Giới thiệu chung -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Fresh Fruit là gì?</h2>
+
+            <p>
+                <b>Fresh Fruit</b> là website thương mại điện tử chuyên cung cấp
+                các sản phẩm <b>trái cây tươi sạch</b>, bao gồm trái cây nội địa,
+                trái cây nhập khẩu cao cấp và các <b>giỏ quà trái cây sang trọng</b>
+                phục vụ nhu cầu tiêu dùng hằng ngày cũng như biếu tặng trong
+                các dịp lễ, tết và sự kiện đặc biệt.
+            </p>
+
+            <p>
+                Trong bối cảnh người tiêu dùng ngày càng quan tâm đến
+                <b>sức khỏe, nguồn gốc sản phẩm và chất lượng thực phẩm</b>,
+                Fresh Fruit được xây dựng với mục tiêu mang đến một nền tảng
+                mua sắm trực tuyến <b>an toàn – minh bạch – tiện lợi</b>,
+                giúp khách hàng dễ dàng lựa chọn những sản phẩm phù hợp
+                chỉ với vài thao tác đơn giản.
+            </p>
+
+            <p>
+                Với phương châm
+                <b>“Tươi – Sạch – Chất lượng – Uy tín”</b>,
+                Fresh Fruit cam kết tất cả sản phẩm đều có
+                <b>nguồn gốc rõ ràng</b>, được kiểm soát chặt chẽ về chất lượng,
+                đảm bảo vệ sinh an toàn thực phẩm và giữ trọn
+                <b>giá trị dinh dưỡng tự nhiên</b> khi đến tay người tiêu dùng.
+            </p>
+        </div>
+    </section>
+
+    <!-- Sứ mệnh - Tầm nhìn -->
+    <section class="about-highlight">
+        <div class="container">
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <div class="highlight-box">
+                        <h3>🎯 Sứ mệnh</h3>
+                        <p>
+                            Sứ mệnh của Fresh Fruit là mang đến cho khách hàng
+                            những sản phẩm trái cây <b>tươi ngon – an toàn – giàu dinh dưỡng</b>,
+                            góp phần nâng cao sức khỏe và cải thiện chất lượng
+                            cuộc sống của người tiêu dùng Việt Nam.
+                        </p>
+                        <p>
+                            Bên cạnh đó, Fresh Fruit không ngừng cải tiến dịch vụ,
+                            tối ưu quy trình đặt hàng và giao nhận nhằm mang lại
+                            <b>trải nghiệm mua sắm thuận tiện, nhanh chóng và đáng tin cậy</b>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="highlight-box">
+                        <h3>🌱 Tầm nhìn</h3>
+                        <p>
+                            Fresh Fruit hướng tới trở thành
+                            <b>hệ thống bán lẻ trái cây trực tuyến uy tín hàng đầu tại Việt Nam</b>,
+                            được đông đảo khách hàng tin tưởng và lựa chọn lâu dài.
+                        </p>
+                        <p>
+                            Trong tương lai, Fresh Fruit sẽ tiếp tục mở rộng
+                            danh mục sản phẩm, nâng cao chất lượng dịch vụ,
+                            ứng dụng công nghệ hiện đại nhằm đáp ứng tốt hơn
+                            nhu cầu ngày càng đa dạng của thị trường.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sản phẩm & dịch vụ -->
+    <section class="about-section bg-light">
+        <div class="container">
+            <h2>Sản phẩm & Dịch vụ</h2>
+
+            <p>
+                Fresh Fruit cung cấp đa dạng các sản phẩm và dịch vụ,
+                đáp ứng đầy đủ nhu cầu mua sắm và biếu tặng của khách hàng,
+                từ cá nhân đến doanh nghiệp.
+            </p>
+
+            <ul class="service-list">
+                <li>🍎 Trái cây nội địa tươi sạch, được tuyển chọn từ các vùng trồng uy tín</li>
+                <li>🍇 Trái cây nhập khẩu cao cấp, đảm bảo chất lượng và nguồn gốc rõ ràng</li>
+                <li>🎁 Giỏ quà trái cây sang trọng, phù hợp cho các dịp lễ, tết, sinh nhật, chúc mừng</li>
+                <li>💳 Đặt hàng và thanh toán trực tuyến nhanh chóng, an toàn</li>
+                <li>🚚 Dịch vụ giao hàng tận nơi, đúng hẹn và bảo quản sản phẩm cẩn thận</li>
+            </ul>
+
+            <p>
+                Fresh Fruit luôn nỗ lực mang đến cho khách hàng
+                <b>sự hài lòng cao nhất</b> thông qua chất lượng sản phẩm,
+                phong cách phục vụ chuyên nghiệp và chính sách chăm sóc
+                khách hàng tận tâm.
+            </p>
+        </div>
+    </section>
+
+</div>
+
+
+
+
+
+</body>
+</html>

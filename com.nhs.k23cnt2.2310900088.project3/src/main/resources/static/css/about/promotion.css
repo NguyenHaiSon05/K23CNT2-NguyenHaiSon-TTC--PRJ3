@@ -1,0 +1,31 @@
+.promo-banner {
+    background: linear-gradient(90deg, #1f8c5c, #32d49a);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.promo-intro, .promo-list {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.coupon-box {
+    border: 2px dashed #1f8c5c;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coupon-code {
+    font-size: 26px;
+    font-weight: bold;
+    color: #e53935;
+}
+
+.coupon-info p {
+    margin: 5px 0;
+}
