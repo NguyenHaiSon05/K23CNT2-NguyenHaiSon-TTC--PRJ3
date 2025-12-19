@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Quản lý danh mục</title>
+    <link rel="stylesheet" th:href="@{/css/admin/category.css}">
 </head>
 <body>
 
-<h2>Quản lý danh mục</h2>
+<div class="admin-container">
 
-<a th:href="@{/admin/categories/create}">➕ Thêm danh mục</a>
+    <h2 class="admin-title">📁 Quản lý danh mục</h2>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Tên</th>
-        <th>Mô tả</th>
-        <th>Hành động</th>
-    </tr>
+    <a th:href="@{/admin/categories/create}" class="admin-add">
+        ➕ Thêm danh mục
+    </a>
 
-    <tr th:each="c : ${categories}">
-        <td th:text="${c.categoryId}"></td>
-        <td th:text="${c.name}"></td>
-        <td th:text="${c.description}"></td>
-        <td>
-            <a th:href="@{/admin/categories/edit/{id}(id=${c.categoryId})}">✏️ Sửa</a>
-            |
-            <a th:href="@{/admin/categories/delete/{id}(id=${c.categoryId})}"
-               onclick="return confirm('Xóa danh mục này?')">🗑 Xóa</a>
-        </td>
-    </tr>
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Mô tả</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
 
-</table>
+        <tbody>
+        <tr th:each="c : ${categories}">
+            <td th:text="${c.categoryId}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.description}"></td>
+            <td class="admin-actions">
+                <a th:href="@{/admin/categories/edit/{id}(id=${c.categoryId})}"
+                   class="edit">✏️ Sửa</a>
+                <a th:href="@{/admin/categories/delete/{id}(id=${c.categoryId})}"
+                   class="delete"
+                   onclick="return confirm('Xóa danh mục này?')">🗑 Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
 
 </body>
 </html>

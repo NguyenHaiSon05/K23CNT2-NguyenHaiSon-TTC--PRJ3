@@ -127,3 +127,178 @@
 .order-detail-container a:hover {
     text-decoration: underline;
 }
+.status {
+    font-weight: 600;
+}
+
+.status.PENDING {
+    color: orange;
+}
+
+.status.WAIT_PAYMENT {
+    color: #0d6efd; /* xanh dương */
+}
+
+.status.PAID {
+    color: green;
+}
+
+.status.CANCELLED {
+    color: red;
+}
+/* ===== CONTAINER ===== */
+.order-detail-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== TITLE ===== */
+.order-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* ===== INFO ===== */
+.order-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.order-info p {
+    font-size: 15px;
+    color: #555;
+}
+
+.order-info b {
+    color: #000;
+}
+
+/* ===== STATUS ===== */
+.status {
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* ===== TABLE ===== */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table thead {
+    background: #f5f5f5;
+}
+
+.order-table th,
+.order-table td {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.order-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.order-table tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.order-table tbody tr:hover {
+    background: #fafafa;
+}
+
+/* ===== TOTAL ===== */
+.order-total {
+    margin: 25px 0;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: right;
+    color: #27ae60;
+}
+
+/* ===== CANCEL BUTTON ===== */
+.btn-cancel {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #c0392b;
+}
+
+/* ===== BACK LINK ===== */
+.order-detail-container a {
+    display: inline-block;
+    margin-top: 25px;
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.order-detail-container a:hover {
+    text-decoration: underline;
+}
+.status {
+    font-weight: 600;
+}
+
+.status.PENDING {
+    color: orange;
+}
+
+.status.WAIT_PAYMENT {
+    color: #0d6efd; /* xanh dương */
+}
+
+.status.PAID {
+    color: green;
+}
+
+.status.CANCELLED {
+    color: red;
+}
+.status.SHIPPING {
+    color: #fd7e14; /* cam đậm – đang giao */
+}
+
+.status.COMPLETED {
+    color: #198754; /* xanh lá đậm – hoàn tất */
+}
+

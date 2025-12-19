@@ -25,10 +25,12 @@
         <p>
             <b>Trạng thái:</b>
             <span class="status"
-                  th:classappend="${order.status.toLowerCase()}"
-                  th:text="${order.status}">
-        </span>
+                  th:classappend="${order.status}"
+                  th:text="${order.status != null ? order.status.label : 'Không xác định'}">
+</span>
+
         </p>
+
     </div>
 
 
@@ -52,12 +54,13 @@
         </tbody>
     </table>
 
-    <form th:if="${order.status == 'PENDING'}"
+    <form th:if="${order.status == T(com.freshfruit.nhsentity.OrderStatus).PENDING}"
           th:action="@{'/account/orders/cancel/' + ${order.orderId}}"
           method="post"
           onsubmit="return confirm('Bạn có chắc muốn hủy đơn này?')">
         <button class="btn-cancel">HỦY ĐƠN</button>
     </form>
+
 
     <p class="total">
         <b>Tổng thanh toán:</b>

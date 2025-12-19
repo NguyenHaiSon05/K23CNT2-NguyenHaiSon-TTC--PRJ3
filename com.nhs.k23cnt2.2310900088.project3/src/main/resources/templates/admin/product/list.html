@@ -2,38 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Quản lý sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/admin/product/list.css}">
 </head>
 <body>
 
-<h2>📦 Quản lý sản phẩm</h2>
+<div class="admin-container">
 
-<a href="/admin/products/create">➕ Thêm sản phẩm</a>
+    <div class="admin-header">
+        <h2>📦 Quản lý sản phẩm</h2>
+        <a href="/admin/products/create" class="btn btn-add">➕ Thêm sản phẩm</a>
+    </div>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Tên</th>
-        <th>Giá</th>
-        <th>Tồn kho</th>
-        <th>Danh mục</th>
-        <th>Hành động</th>
-    </tr>
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Tồn kho</th>
+            <th>Danh mục</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
 
-    <tr th:each="p : ${products}">
-        <td th:text="${p.productId}"></td>
-        <td th:text="${p.name}"></td>
-        <td th:text="${p.price}"></td>
-        <td th:text="${p.stock}"></td>
-        <td th:text="${p.category.name}"></td>
-        <td>
-            <a th:href="@{/admin/products/edit/{id}(id=${p.productId})}">✏️ Sửa</a>
-            |
-            <a th:href="@{/admin/products/delete/{id}(id=${p.productId})}"
-               onclick="return confirm('Xóa sản phẩm này?')">🗑 Xóa</a>
-        </td>
-    </tr>
+        <tbody>
+        <tr th:each="p : ${products}">
+            <td th:text="${p.productId}"></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.price} + 'đ'"></td>
+            <td th:text="${p.stock}"></td>
+            <td th:text="${p.category.name}"></td>
+            <td class="action">
+                <a th:href="@{/admin/products/edit/{id}(id=${p.productId})}" class="btn btn-edit">✏️ Sửa</a>
+                <a th:href="@{/admin/products/delete/{id}(id=${p.productId})}"
+                   class="btn btn-delete"
+                   onclick="return confirm('Xóa sản phẩm này?')">🗑 Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-</table>
+</div>
 
 </body>
 </html>

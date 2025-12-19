@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" th:href="@{/css/admin/orders.css}">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <div class="admin-title">Quản lý đơn hàng</div>
+
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Khách</th>
+            <th>Thanh toán</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="o : ${orders}">
+            <td th:text="${o.orderId}"></td>
+            <td th:text="${o.fullName}"></td>
+            <td th:text="${o.paymentMethod}"></td>
+            <td th:text="${o.totalAmount} + 'đ'"></td>
+
+            <!-- STATUS -->
+            <td>
+                <span class="status-badge"
+                      th:classappend="' status-' + ${o.status.name()}"
+                      th:text="${o.status.label}">
+                </span>
+            </td>
+
+            <!-- ACTION -->
+            <td>
+                <form class="admin-form"
+                      th:action="@{/admin/orders/update-status}"
+                      method="post">
+
+                    <input type="hidden" name="orderId" th:value="${o.orderId}"/>
+
+                    <select name="status">
+                        <option th:each="s : ${T(com.freshfruit.nhsentity.OrderStatus).values()}"
+                                th:value="${s}"
+                                th:selected="${s == o.status}"
+                                th:text="${s}">
+                        </option>
+                    </select>
+
+                    <button type="submit">Cập nhật</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

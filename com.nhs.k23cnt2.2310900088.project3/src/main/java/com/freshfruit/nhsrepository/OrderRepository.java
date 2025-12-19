@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Integer> {
 
+    List<OrderEntity> findAllByOrderByCreatedAtDesc();
+
     List<OrderEntity> findByUser_UserIdOrderByCreatedAtDesc(Integer userId);
     // Tổng doanh thu (chỉ tính đơn hoàn thành)
     @Query("SELECT COALESCE(SUM(o.totalAmount), 0) " +

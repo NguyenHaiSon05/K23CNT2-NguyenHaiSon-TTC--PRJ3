@@ -23,7 +23,9 @@ public class OrderEntity {
     private String paymentMethod;
     private Double totalAmount;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private OrderStatus status;
 
     private LocalDateTime createdAt;
 
@@ -34,4 +36,5 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
 }
+
 

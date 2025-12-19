@@ -89,10 +89,19 @@ public class CheckoutController {
         order.setNote(note);
         order.setPaymentMethod(paymentMethod);
         order.setTotalAmount(finalTotal);
-        order.setStatus("PENDING");
         order.setCreatedAt(LocalDateTime.now());
 
+        // 🔥 PHÂN BIỆT COD / BANK
+        if ("COD".equals(paymentMethod)) {
+            order.setStatus(OrderStatus.PENDING);
+        } else if ("QR".equals(paymentMethod)) {
+            order.setStatus(OrderStatus.WAIT_PAYMENT);
+        }
+
+
+
         orderRepository.save(order);
+
 
         // ===== 3. ORDER ITEMS =====
         for (CartItem cartItem : cart.getItems()) {

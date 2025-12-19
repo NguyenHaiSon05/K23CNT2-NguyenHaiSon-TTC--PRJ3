@@ -1,6 +1,7 @@
 package com.freshfruit.nhscontroller;
 
 import com.freshfruit.nhsentity.OrderEntity;
+import com.freshfruit.nhsentity.OrderStatus;
 import com.freshfruit.nhsentity.UserEntity;
 import com.freshfruit.nhsrepository.OrderRepository;
 import com.freshfruit.nhsrepository.UserRepository;
@@ -208,7 +209,7 @@ public class AuthController {
                 && order.getUser().getUserId().equals(user.getUserId())
                 && order.getStatus().equals("PENDING")) {
 
-            order.setStatus("CANCELLED");
+            order.setStatus(OrderStatus.CANCELLED);
             orderRepository.save(order);
         }
 

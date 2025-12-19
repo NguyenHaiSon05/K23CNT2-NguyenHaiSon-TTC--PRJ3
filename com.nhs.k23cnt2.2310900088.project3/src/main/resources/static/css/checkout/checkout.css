@@ -129,3 +129,23 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.qr-box {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px dashed #28a745;
+    border-radius: 8px;
+    background: #f9fff9;
+    text-align: center;
+}
+
+.qr-box h4 {
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.qr-note {
+    margin-top: 10px;
+    color: #d63384;
+    font-size: 14px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form danh mục</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin-form.css}">
+</head>
+<body>
+
+<div class="admin-container">
+
+    <h2 th:text="${category.categoryId == null ? '➕ Thêm danh mục' : '✏️ Sửa danh mục'}"></h2>
+
+    <form th:action="@{/admin/categories/save}"
+          th:object="${category}"
+          method="post"
+          class="admin-form">
+
+        <input type="hidden" th:field="*{categoryId}"/>
+
+        <div class="form-group">
+            <label>Tên danh mục</label>
+            <input type="text" th:field="*{name}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mô tả</label>
+            <textarea th:field="*{description}" rows="4"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-save">💾 Lưu</button>
+            <a href="/admin/categories" class="btn btn-back">⬅ Quay lại</a>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

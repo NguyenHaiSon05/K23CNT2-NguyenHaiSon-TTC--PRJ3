@@ -88,7 +88,11 @@
                 <td th:text="${o.totalAmount} + 'đ'"></td>
                 <td>
                 <span class="status"
-                      th:text="${o.status}"></span>
+                    th:classappend="${o.status}"
+                    th:text="${o.status != null ? o.status.label : 'Không xác định'}">
+                </span>
+
+
                 </td>
             </tr>
             </tbody>

@@ -42,6 +42,8 @@
             </div>
 
             <h3>Phương thức thanh toán</h3>
+            <h3>Phương thức thanh toán</h3>
+
             <div class="payment-method">
                 <label>
                     <input type="radio" name="paymentMethod" value="COD" checked>
@@ -49,10 +51,19 @@
                 </label>
 
                 <label>
-                    <input type="radio" name="paymentMethod" value="BANK">
+                    <input type="radio" name="paymentMethod" value="QR">
                     Chuyển khoản ngân hàng
                 </label>
             </div>
+
+            <!-- QR BOX -->
+            <div id="qr-box" class="qr-box" style="display: none;">
+                <h4>Quét mã QR để thanh toán</h4>
+
+                <img src="/image/qr-bank.png" alt="QR Thanh toán" width="220">
+
+            </div>
+
 
         </div>
 
@@ -100,6 +111,22 @@
     </div>
 
 </form>
+
+<script>
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    const qrBox = document.getElementById('qr-box');
+
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            if (this.value === 'QR') {
+                qrBox.style.display = 'block';
+            } else {
+                qrBox.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 
 <div th:replace="layout/footer :: footer"></div>
 
