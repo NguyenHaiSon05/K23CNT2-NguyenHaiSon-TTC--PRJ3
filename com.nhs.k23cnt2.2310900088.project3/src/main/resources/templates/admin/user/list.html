@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý người dùng</title>
+    <link rel="stylesheet" th:href="@{/css/admin/user.css}">
+</head>
+<body>
+
+<div class="admin-container">
+    <h2 class="admin-title">👤 Quản lý người dùng</h2>
+
+    <table class="admin-table user-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Quyền</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.userId}"></td>
+            <td th:text="${u.username}"></td>
+            <td th:text="${u.fullName}"></td>
+            <td th:text="${u.email}"></td>
+
+            <!-- QUYỀN -->
+            <td>
+                <span class="role-badge"
+                      th:text="${u.role != null ? u.role.roleName : 'CHƯA GÁN'}"
+                      th:classappend="${
+                              u.role != null and u.role.roleName == 'ADMIN'
+                              ? ' role-admin'
+                              : ' role-user'
+                      }">
+                </span>
+            </td>
+
+            <!-- TRẠNG THÁI -->
+            <td>
+                <span class="status-badge"
+                      th:text="${u.enabled ? 'Hoạt động' : 'Bị khóa'}"
+                      th:classappend="${u.enabled ? ' status-active' : ' status-locked'}">
+                </span>
+            </td>
+
+            <!-- HÀNH ĐỘNG -->
+            <td class="actions">
+                <a th:href="@{/admin/users/edit/{id}(id=${u.userId})}" class="btn-edit">✏️ Sửa</a>
+
+                <a th:href="@{/admin/users/toggle/{id}(id=${u.userId})}"
+                   class="btn-lock"
+                   th:text="${u.enabled ? '🔒 Khóa' : '🔓 Mở'}"
+                   onclick="return confirm('Xác nhận thay đổi trạng thái user?')">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

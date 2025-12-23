@@ -63,7 +63,7 @@
 
     <div th:if="${section == 'orders'}">
 
-        <h2>ĐƠN HÀNG CỦA TÔI</h2>
+        <h2>Đơn Hàng Của Bạn</h2>
 
         <table class="order-table">
             <thead>
@@ -101,6 +101,63 @@
         <p th:if="${orders.size() == 0}">
             Bạn chưa có đơn hàng nào.
         </p>
+    </div>
+
+    <!-- PROFILE -->
+    <div th:if="${section == 'profile'}">
+
+        <h2>Tài Khoản Của Bạn</h2>
+
+        <form th:action="@{/account/profile}"
+              method="post"
+              th:object="${user}"
+              class="profile-form">
+
+            <div class="form-row">
+                <label>Email</label>
+                <input type="email" th:field="*{email}" readonly>
+            </div>
+
+            <div class="form-row">
+                <label>Tên đăng nhập</label>
+                <input type="text" th:field="*{username}">
+            </div>
+
+            <div class="form-row">
+                <label>Họ tên</label>
+                <input type="text" th:field="*{fullName}">
+            </div>
+
+            <div class="form-row">
+                <label>Số điện thoại</label>
+                <input type="text" th:field="*{phone}">
+            </div>
+
+            <div class="form-row">
+                <label>Địa chỉ</label>
+                <input type="text" th:field="*{address}">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-update">
+                    Cập nhật
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="account-right" th:if="${section == 'address'}">
+
+        <h2>ĐỊA CHỈ CỦA BẠN</h2>
+
+        <div class="address-box">
+            <p><strong>Họ tên:</strong> <span th:text="${user.fullName}"></span></p>
+            <p><strong>Số điện thoại:</strong> <span th:text="${user.phone}"></span></p>
+            <p><strong>Địa chỉ:</strong> <span th:text="${user.address}"></span></p>
+        </div>
 
     </div>
 
