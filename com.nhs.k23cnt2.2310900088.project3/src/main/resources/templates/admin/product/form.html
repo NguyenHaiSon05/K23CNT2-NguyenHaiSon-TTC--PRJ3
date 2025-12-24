@@ -1,104 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Form sản phẩm</title>
+    <title>Form sản phẩm - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/product/form.css}">
-
 </head>
 <body>
 
-<h2 th:text="${product.productId == null ? '➕ Thêm sản phẩm' : '✏️ Sửa sản phẩm'}"></h2>
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-<form th:action="@{/admin/products/save}"
-      th:object="${product}"
-      method="post"
-      enctype="multipart/form-data">
+<div style="display: flex; min-height: 100vh;">
 
-    <p th:if="${error}" style="color:red; font-weight:bold;">
-        ⚠️ <span th:text="${error}"></span>
-    </p>
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
 
-    <input type="hidden" th:field="*{productId}"/>
+        <div style="margin-bottom: 25px;">
+            <h2 style="font-size: 24px; font-weight: 700; color: #111827;"
+                th:text="${product.productId == null ? ' Thêm trái cây mới' : ' Cập nhật sản phẩm'}">
+            </h2>
+        </div>
 
-    <div>
-        <label>Tên sản phẩm</label><br>
-        <input type="text" th:field="*{name}" required>
-    </div>
+        <div class="form-card">
 
-    <div>
-        <label>Giá</label><br>
-        <input type="number" th:field="*{price}" required>
-    </div>
+            <form th:action="@{/admin/products/save}"
+                  th:object="${product}"
+                  method="post"
+                  enctype="multipart/form-data">
 
-    <div>
-        <label>Tồn kho</label><br>
-        <input type="number" th:field="*{stock}">
-    </div>
+                <div th:if="${error}" class="alert-error">
+                    ⚠️ <span th:text="${error}"></span>
+                </div>
 
-    <div>
-        <label>Đơn vị</label><br>
-        <select th:field="*{unit}">
-            <option value="kg">kg</option>
-            <option value="hộp">hộp</option>
-        </select>
-    </div>
+                <input type="hidden" th:field="*{productId}"/>
 
-    <div>
-        <label>Danh mục</label><br>
+                <div class="form-grid">
 
-        <select name="categoryId">
-            <option value="">-- Chọn danh mục --</option>
+                    <div class="form-left">
 
-            <option th:each="c : ${categories}"
-                    th:value="${c.categoryId}"
-                    th:text="${c.name}"
-                    th:selected="${product.category != null
-                              && c.categoryId == product.category.categoryId}">
-            </option>
-        </select>
-    </div>
+                        <div class="form-group">
+                            <label>Tên sản phẩm <span class="required">*</span></label>
+                            <input type="text" th:field="*{name}" class="form-control" placeholder="Ví dụ: Táo Envy Mỹ..." required>
+                        </div>
 
-    <div>
-        <label>Ảnh sản phẩm</label><br>
+                        <div class="row-3-col">
+                            <div class="form-group">
+                                <label>Giá bán (VNĐ) <span class="required">*</span></label>
+                                <input type="number" th:field="*{price}" class="form-control" placeholder="0" required>
+                            </div>
 
-        <input type="file"
-               name="imageFile"
-               accept="image/*"
-               onchange="previewImage(this)">
+                            <div class="form-group">
+                                <label>Tồn kho</label>
+                                <input type="number" th:field="*{stock}" class="form-control" placeholder="0">
+                            </div>
 
-        <br><br>
+                            <div class="form-group">
+                                <label>Đơn vị tính</label>
+                                <select th:field="*{unit}" class="form-control">
+                                    <option value="kg">Kg</option>
+                                    <option value="hộp">Hộp</option>
+                                    <option value="quả">Quả</option>
+                                    <option value="khay">Khay</option>
+                                </select>
+                            </div>
+                        </div>
 
-        <img id="previewImg"
-             th:src="${product.image != null ? product.image : ''}"
-             th:style="${product.image != null ? 'max-width:200px; border-radius:8px; border:1px solid #ddd'
-                                           : 'display:none; max-width:200px; border-radius:8px; border:1px solid #ddd'}">
-    </div>
+                        <div class="form-group">
+                            <label>Danh mục</label>
+                            <select name="categoryId" class="form-control">
+                                <option value="">-- Chọn danh mục --</option>
+                                <option th:each="c : ${categories}"
+                                        th:value="${c.categoryId}"
+                                        th:text="${c.name}"
+                                        th:selected="${product.category != null && c.categoryId == product.category.categoryId}">
+                                </option>
+                            </select>
+                        </div>
 
+                        <div class="form-group">
+                            <label>Mô tả chi tiết</label>
+                            <textarea th:field="*{description}" class="form-control" rows="5" placeholder="Mô tả về hương vị, xuất xứ..."></textarea>
+                        </div>
 
-    <div>
-        <label>Mô tả</label><br>
-        <textarea th:field="*{description}"></textarea>
-    </div>
+                    </div>
 
-    <br>
-    <button type="submit">💾 Lưu</button>
-    <a href="/admin/products">⬅ Quay lại</a>
+                    <div class="form-right">
+                        <label style="margin-bottom: 10px; display:block;">Ảnh đại diện</label>
 
-</form>
+                        <div class="image-upload-box">
+                            <img id="previewImg"
+                                 th:src="${product.image != null ? product.image : 'https://placehold.co/300x300?text=No+Image'}"
+                                 class="preview-image">
+
+                            <input type="file" name="imageFile" id="fileInput" accept="image/*" onchange="previewImage(this)" class="file-input">
+                            <label for="fileInput" class="btn-upload">📁 Chọn ảnh</label>
+                            <p class="upload-note">Dung lượng tối đa 2MB. Định dạng: JPG, PNG.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <a href="/admin/products" class="btn btn-secondary">Quay lại</a>
+                    <button type="submit" class="btn btn-primary"> Lưu sản phẩm </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+</div>
 
 <script>
     function previewImage(input) {
         const preview = document.getElementById("previewImg");
-
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 preview.src = e.target.result;
-                preview.style.display = "block";
             };
-
             reader.readAsDataURL(input.files[0]);
         }
     }

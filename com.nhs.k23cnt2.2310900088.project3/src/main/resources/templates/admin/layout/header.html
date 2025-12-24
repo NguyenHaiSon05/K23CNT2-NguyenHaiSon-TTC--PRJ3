@@ -2,13 +2,29 @@
         th:fragment="adminHeader"
         class="admin-header">
 
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-        <h3>ADMIN PANEL – FreshFruit</h3>
-
-        <div>
-            👤 <span th:text="${adminName}">Admin</span>
-            |
-            <a th:href="@{/logout}" style="color:white;text-decoration:none">Đăng xuất</a>
-        </div>
+    <div class="header-left">
+        <span class="brand-sub">ADMIN PANEL</span>
+        <span class="brand-divider">|</span>
+        <span class="brand-main">FreshFruit 🍎</span>
     </div>
+
+    <div class="header-right">
+
+        <div class="header-user">
+            <img th:src="'https://ui-avatars.com/api/?name=' + ${adminName} + '&background=1f8c5c&color=fff&size=40'"
+                 class="header-avatar" alt="Admin">
+
+            <div class="header-user-info">
+                <span class="welcome-text">Xin chào</span>
+                <span class="username-text" th:text="${adminName}">Admin</span>
+            </div>
+        </div>
+
+        <a th:href="@{/logout}" class="header-logout" title="Đăng xuất khỏi hệ thống">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Đăng xuất</span>
+        </a>
+
+    </div>
+
 </header>

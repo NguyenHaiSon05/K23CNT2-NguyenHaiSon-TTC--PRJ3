@@ -1,53 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Sửa người dùng</title>
-    <link rel="stylesheet" th:href="@{/css/admin/product/form.css}">
+    <title>Cập nhật người dùng - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/user/form.css}">
 </head>
 <body>
 
-<div class="admin-container">
-    <h2 class="admin-title">✏️ Sửa người dùng</h2>
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-    <form th:action="@{/admin/users/save}" th:object="${user}" method="post" class="admin-form">
+<div style="display: flex; min-height: 100vh;">
 
-        <input type="hidden" th:field="*{userId}"/>
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-        <label>Username</label>
-        <input type="text" th:value="${user.username}" readonly>
+    <main style="flex: 1; padding: 40px; background-color: #f9fafb;">
 
-        <label>Họ tên</label>
-        <input type="text" th:field="*{fullName}">
+        <div class="centered-container">
 
-        <label>Email</label>
-        <input type="email" th:field="*{email}">
+            <div class="form-card">
+                <h2 class="form-title"> Cập nhật thông tin</h2>
+                <p class="form-subtitle">Chỉnh sửa thông tin chi tiết của người dùng</p>
 
-        <label>Số điện thoại</label>
-        <input type="text" th:field="*{phone}">
+                <form th:action="@{/admin/users/save}"
+                      th:object="${user}"
+                      method="post">
 
-        <label>Địa chỉ</label>
-        <input type="text" th:field="*{address}">
+                    <input type="hidden" th:field="*{userId}"/>
 
-        <label>Quyền</label>
-        <select th:field="*{role}">
-            <option th:each="r : ${roles}"
-                    th:value="${r}"
-                    th:text="${r.roleName}">
-            </option>
-        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Username (Không thể sửa)</label>
+                            <input type="text" th:value="${user.username}" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" th:field="*{email}" class="form-control" required>
+                        </div>
+                    </div>
 
-        <label>Trạng thái</label>
-        <select th:field="*{enabled}">
-            <option th:value="true">Hoạt động</option>
-            <option th:value="false">Bị khóa</option>
-        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" th:field="*{fullName}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" th:field="*{phone}" class="form-control">
+                        </div>
+                    </div>
 
-        <div class="form-actions">
-            <button type="submit">💾 Lưu</button>
-            <a href="/admin/users">⬅ Quay lại</a>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" th:field="*{address}" class="form-control" placeholder="Nhập địa chỉ giao hàng...">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phân quyền</label>
+                            <select th:field="*{role}" class="form-control">
+                                <option th:each="r : ${roles}"
+                                        th:value="${r}"
+                                        th:text="${r.roleName}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Trạng thái tài khoản</label>
+                            <select th:field="*{enabled}" class="form-control">
+                                <option th:value="true">✅ Hoạt động</option>
+                                <option th:value="false">⛔ Bị khóa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/admin/users" class="btn btn-secondary">Quay lại</a>
+                        <button type="submit" class="btn btn-primary"> Lưu thay đổi</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
-    </form>
+
+    </main>
 </div>
 
 </body>

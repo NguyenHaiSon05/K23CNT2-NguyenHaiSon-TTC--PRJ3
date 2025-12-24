@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Form danh mục</title>
-    <link rel="stylesheet" th:href="@{/css/admin/admin-form.css}">
+    <title>Form danh mục - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/category/form.css}">
 </head>
 <body>
 
-<div class="admin-container">
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-    <h2 th:text="${category.categoryId == null ? '➕ Thêm danh mục' : '✏️ Sửa danh mục'}"></h2>
+<div style="display: flex; min-height: 100vh;">
 
-    <form th:action="@{/admin/categories/save}"
-          th:object="${category}"
-          method="post"
-          class="admin-form">
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-        <input type="hidden" th:field="*{categoryId}"/>
+    <main style="flex: 1; padding: 40px; background-color: #f9fafb;">
 
-        <div class="form-group">
-            <label>Tên danh mục</label>
-            <input type="text" th:field="*{name}" required>
+        <div class="centered-container">
+
+            <div class="form-card">
+                <h2 class="form-title"
+                    th:text="${category.categoryId == null ? ' Thêm danh mục mới' : ' Cập nhật danh mục'}">
+                </h2>
+
+                <p class="form-subtitle">Nhập thông tin phân loại sản phẩm</p>
+
+                <form th:action="@{/admin/categories/save}"
+                      th:object="${category}"
+                      method="post">
+
+                    <input type="hidden" th:field="*{categoryId}"/>
+
+                    <div class="form-group">
+                        <label>Tên danh mục <span class="required">*</span></label>
+                        <input type="text" th:field="*{name}" class="form-control" placeholder="Ví dụ: Trái cây nhập khẩu..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô tả ngắn</label>
+                        <textarea th:field="*{description}" class="form-control" rows="4" placeholder="Mô tả về loại danh mục này..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/admin/categories" class="btn btn-secondary">Quay lại</a>
+                        <button type="submit" class="btn btn-primary"> Lưu danh mục</button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            <label>Mô tả</label>
-            <textarea th:field="*{description}" rows="4"></textarea>
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn btn-save">💾 Lưu</button>
-            <a href="/admin/categories" class="btn btn-back">⬅ Quay lại</a>
-        </div>
-
-    </form>
-
+    </main>
 </div>
 
 </body>

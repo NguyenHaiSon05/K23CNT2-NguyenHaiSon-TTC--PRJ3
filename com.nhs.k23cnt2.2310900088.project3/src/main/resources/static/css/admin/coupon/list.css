@@ -1,0 +1,111 @@
+/* --- HEADER --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+.page-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* --- NÚT THÊM MỚI (CHUẨN MẪU BẠN THÍCH) --- */
+.btn-add-new {
+    background-color: #1f8c5c; /* Màu xanh lá chuẩn của trang Sản phẩm */
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách icon và chữ */
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.btn-add-new:hover {
+    background-color: #166542; /* Đậm hơn khi hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* --- TABLE (BẢNG) --- */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.custom-table th {
+    background-color: #f9fafb;
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e7eb;
+}
+.custom-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.custom-table tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* --- CÁC THÀNH PHẦN KHÁC TRONG BẢNG --- */
+/* Mã Code tím */
+.code-badge {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #7c3aed;
+    background-color: #f3f0ff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px dashed #d8b4fe;
+}
+
+/* Trạng thái */
+.status-badge { font-size: 13px; font-weight: 500; }
+.status-active { color: #059669; }
+.status-inactive { color: #9ca3af; }
+
+/* Icon hành động */
+.text-right { text-align: right; }
+.action-buttons { display: flex; justify-content: flex-end; gap: 8px; }
+
+.btn-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; cursor: pointer; transition: 0.2s;
+    background: transparent;
+}
+
+/* Màu icon */
+.btn-edit { background-color: #eff6ff; color: #3b82f6; }
+.btn-edit:hover { background-color: #3b82f6; color: white; }
+
+.btn-stop { background-color: #fee2e2; color: #ef4444; } /* Nút Tắt màu đỏ */
+.btn-stop:hover { background-color: #ef4444; color: white; }
+
+.btn-start { background-color: #d1fae5; color: #10b981; } /* Nút Bật màu xanh */
+.btn-start:hover { background-color: #10b981; color: white; }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Voucher - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/coupon/form.css}">
+</head>
+<body>
+
+<div th:replace="admin/layout/header :: adminHeader"></div>
+
+<div style="display: flex; min-height: 100vh;">
+
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
+
+    <main style="flex: 1; padding: 40px; background-color: #f9fafb;">
+
+        <div class="centered-container">
+
+            <div class="form-card">
+                <h2 class="form-title"
+                    th:text="${coupon.couponId == null ? ' Tạo mã giảm giá mới' : ' Cập nhật mã giảm giá'}">
+                </h2>
+                <p class="form-subtitle">Điền thông tin chương trình khuyến mãi</p>
+
+                <form th:action="@{/admin/coupons/save}"
+                      th:object="${coupon}"
+                      method="post">
+
+                    <input type="hidden" th:field="*{couponId}"/>
+
+                    <div th:if="${error}" class="alert-error" th:text="${error}"></div>
+
+                    <div class="form-group">
+                        <label>Mã Code <span class="required">*</span></label>
+                        <input type="text" th:field="*{code}" class="form-control code-input"
+                               placeholder="Ví dụ: SUMMER2025" required>
+                        <small style="color:#6b7280; font-size:12px;">Mã sẽ hiển thị in hoa trên voucher.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mức giảm (%) <span class="required">*</span></label>
+                        <input type="number" th:field="*{discountPercent}" class="form-control"
+                               min="1" max="100" placeholder="Nhập số % (1-100)" required>
+                    </div>
+
+                    <div class="date-row">
+                        <div class="form-group">
+                            <label>Ngày bắt đầu</label>
+                            <input type="date" th:field="*{startDate}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ngày kết thúc</label>
+                            <input type="date" th:field="*{endDate}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" th:field="*{status}" id="statusCheck" class="custom-checkbox">
+                        <label for="statusCheck" style="margin:0; cursor:pointer;">Kích hoạt mã này ngay sau khi tạo</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <a th:href="@{/admin/coupons}" class="btn btn-secondary">Quay lại</a>
+                        <button type="submit" class="btn btn-primary"> Lưu Voucher</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>

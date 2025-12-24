@@ -1,71 +1,77 @@
-body {
-    font-family: "Segoe UI", sans-serif;
-    background: #f5f6f8;
-}
-
-.admin-container {
-    width: 95%;
-    margin: 30px auto;
-    background: #fff;
-    padding: 25px;
+/* NÚT THÊM MỚI (Gradient xanh lá) */
+.btn-primary {
+    background: linear-gradient(135deg, #1f8c5c 0%, #10b981 100%);
+    color: white;
+    padding: 12px 24px;
     border-radius: 8px;
-}
-
-.admin-header {
-    display: flex;
-    justify-content: space-between;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    transition: 0.3s;
+    display: inline-flex;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
-.admin-header h2 {
-    margin: 0;
-    font-size: 22px;
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
 }
 
-.btn {
-    padding: 6px 12px;
-    border-radius: 4px;
+/* ẢNH SẢN PHẨM TRONG BẢNG */
+.table-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px; /* Bo góc ảnh */
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+/* TRẠNG THÁI TỒN KHO (Badge) */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.badge-green {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+.badge-red {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* NÚT HÀNH ĐỘNG (Nhỏ gọn, tinh tế) */
+.btn-action {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    background-color: #f3f4f6;
+    transition: 0.2s;
     text-decoration: none;
-    font-size: 14px;
+    margin-left: 5px;
 }
 
-.btn-add {
-    background: #198754;
-    color: #fff;
+/* Nút Sửa màu xanh dương nhạt */
+.btn-edit:hover {
+    background-color: #dbeafe;
+    transform: scale(1.1);
 }
 
-.btn-edit {
-    background: #0d6efd;
-    color: #fff;
+/* Nút Xóa màu đỏ nhạt */
+.btn-delete:hover {
+    background-color: #fee2e2;
+    transform: scale(1.1);
 }
 
-.btn-delete {
-    background: #dc3545;
-    color: #fff;
-}
-
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.admin-table th {
-    background: #f1f3f5;
-    padding: 10px;
-    text-align: left;
-}
-
-.admin-table td {
-    padding: 10px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.admin-table tr:hover {
-    background: #fafafa;
-}
-
-.action {
-    display: flex;
-    gap: 6px;
+/* TABLE CONTAINER (Kế thừa từ admin.css nhưng custom thêm nếu cần) */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden; /* Để bo góc bảng */
 }

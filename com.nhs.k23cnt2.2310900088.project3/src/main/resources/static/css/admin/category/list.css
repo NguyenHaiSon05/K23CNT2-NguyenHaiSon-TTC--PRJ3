@@ -1,0 +1,106 @@
+/* --- HEADER CỦA TRANG --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.page-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* --- NÚT THÊM MỚI (XANH LÁ) --- */
+.btn-primary {
+    background-color: #1f8c5c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(31, 140, 92, 0.2);
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #166542;
+    transform: translateY(-2px);
+}
+
+/* --- KHUNG BẢNG --- */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* --- HEADER BẢNG --- */
+.custom-table th {
+    background-color: #f9fafb;
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* --- DÒNG DỮ LIỆU --- */
+.custom-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.custom-table tr:hover td {
+    background-color: #f8fafc; /* Hover sáng nhẹ */
+}
+
+/* --- NÚT HÀNH ĐỘNG (ICON) --- */
+.text-right { text-align: right; }
+
+.btn-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+    margin-left: 6px;
+    font-size: 16px;
+}
+
+.btn-edit {
+    background-color: #eff6ff;
+    border: 1px solid #dbeafe;
+}
+.btn-edit:hover { background-color: #2563eb; border-color: #2563eb; }
+
+.btn-delete {
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+}
+.btn-delete:hover { background-color: #dc2626; border-color: #dc2626; }

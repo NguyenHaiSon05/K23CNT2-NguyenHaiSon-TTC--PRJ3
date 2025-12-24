@@ -1,46 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Quản lý danh mục</title>
-    <link rel="stylesheet" th:href="@{/css/admin/category.css}">
+    <title>Quản lý danh mục - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/category/list.css}">
 </head>
 <body>
 
-<div class="admin-container">
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-    <h2 class="admin-title">📁 Quản lý danh mục</h2>
+<div style="display: flex; min-height: 100vh;">
 
-    <a th:href="@{/admin/categories/create}" class="admin-add">
-        ➕ Thêm danh mục
-    </a>
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-    <table class="admin-table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Mô tả</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
 
-        <tbody>
-        <tr th:each="c : ${categories}">
-            <td th:text="${c.categoryId}"></td>
-            <td th:text="${c.name}"></td>
-            <td th:text="${c.description}"></td>
-            <td class="admin-actions">
-                <a th:href="@{/admin/categories/edit/{id}(id=${c.categoryId})}"
-                   class="edit">✏️ Sửa</a>
-                <a th:href="@{/admin/categories/delete/{id}(id=${c.categoryId})}"
-                   class="delete"
-                   onclick="return confirm('Xóa danh mục này?')">🗑 Xóa</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">📂 Quản lý danh mục</h2>
+                <p class="page-subtitle">Phân loại sản phẩm để khách hàng dễ tìm kiếm</p>
+            </div>
 
+            <a th:href="@{/admin/categories/create}" class="btn-primary">
+                <span style="font-size: 18px; margin-right: 5px;"></span> Thêm danh mục
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th width="80">ID</th>
+                    <th width="250">Tên danh mục</th>
+                    <th>Mô tả</th>
+                    <th class="text-right" width="150">Hành động</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="c : ${categories}">
+                    <td th:text="'#' + ${c.categoryId}" style="color: #888;"></td>
+
+                    <td>
+                        <b th:text="${c.name}" style="color: #333;"></b>
+                    </td>
+
+                    <td th:text="${c.description}" style="color: #555;"></td>
+
+                    <td class="text-right">
+                        <a th:href="@{/admin/categories/edit/{id}(id=${c.categoryId})}" class="btn-icon btn-edit" title="Sửa">
+                            ✏️
+                        </a>
+                        <a th:href="@{/admin/categories/delete/{id}(id=${c.categoryId})}"
+                           class="btn-icon btn-delete"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này? Nếu xóa, các sản phẩm thuộc danh mục này có thể bị lỗi.')" title="Xóa">
+                            🗑
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
 </div>
 
 </body>

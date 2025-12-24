@@ -1,68 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Quản lý người dùng</title>
+    <title>Quản lý người dùng - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/user.css}">
 </head>
 <body>
 
-<div class="admin-container">
-    <h2 class="admin-title">👤 Quản lý người dùng</h2>
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-    <table class="admin-table user-table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Họ tên</th>
-            <th>Email</th>
-            <th>Quyền</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
+<div style="display: flex; min-height: 100vh;">
 
-        <tbody>
-        <tr th:each="u : ${users}">
-            <td th:text="${u.userId}"></td>
-            <td th:text="${u.username}"></td>
-            <td th:text="${u.fullName}"></td>
-            <td th:text="${u.email}"></td>
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-            <!-- QUYỀN -->
-            <td>
-                <span class="role-badge"
-                      th:text="${u.role != null ? u.role.roleName : 'CHƯA GÁN'}"
-                      th:classappend="${
-                              u.role != null and u.role.roleName == 'ADMIN'
-                              ? ' role-admin'
-                              : ' role-user'
-                      }">
-                </span>
-            </td>
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
 
-            <!-- TRẠNG THÁI -->
-            <td>
-                <span class="status-badge"
-                      th:text="${u.enabled ? 'Hoạt động' : 'Bị khóa'}"
-                      th:classappend="${u.enabled ? ' status-active' : ' status-locked'}">
-                </span>
-            </td>
+        <div class="page-header">
+            <div>
+                <h2 class="page-title"> Quản lý người dùng</h2>
+                <p class="page-subtitle">Danh sách khách hàng và quản trị viên hệ thống</p>
+            </div>
+        </div>
 
-            <!-- HÀNH ĐỘNG -->
-            <td class="actions">
-                <a th:href="@{/admin/users/edit/{id}(id=${u.userId})}" class="btn-edit">✏️ Sửa</a>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th>Thành viên</th> <th>Username</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th width="120" class="text-right">Hành động</th>
+                </tr>
+                </thead>
 
-                <a th:href="@{/admin/users/toggle/{id}(id=${u.userId})}"
-                   class="btn-lock"
-                   th:text="${u.enabled ? '🔒 Khóa' : '🔓 Mở'}"
-                   onclick="return confirm('Xác nhận thay đổi trạng thái user?')">
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <tbody>
+                <tr th:each="u : ${users}">
+                    <td th:text="'#'+${u.userId}" style="color: #888;"></td>
+
+                    <td>
+                        <div class="user-profile">
+                            <div class="avatar-circle"
+                                 th:text="${u.fullName != null && u.fullName.length() > 0 ? u.fullName.substring(0,1).toUpperCase() : 'U'}">
+                            </div>
+
+                            <div class="profile-info">
+                                <div class="user-name" th:text="${u.fullName}"></div>
+                                <div class="user-email" th:text="${u.email}"></div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td th:text="${u.username}" style="color: #555;"></td>
+
+                    <td>
+                        <span class="role-badge"
+                              th:text="${u.role != null ? u.role.roleName : 'UNKNOWN'}"
+                              th:classappend="${u.role != null && u.role.roleName == 'ADMIN' ? 'role-admin' : 'role-user'}">
+                        </span>
+                    </td>
+
+                    <td>
+                        <span th:if="${u.enabled}" class="status-badge status-active">● Hoạt động</span>
+                        <span th:unless="${u.enabled}" class="status-badge status-locked">● Bị khóa</span>
+                    </td>
+
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <a th:href="@{/admin/users/edit/{id}(id=${u.userId})}" class="btn-icon btn-edit" title="Sửa thông tin">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </a>
+
+                            <a th:href="@{/admin/users/toggle/{id}(id=${u.userId})}"
+                               class="btn-icon"
+                               th:classappend="${u.enabled} ? 'btn-lock' : 'btn-unlock'"
+                               th:title="${u.enabled} ? 'Khóa tài khoản này' : 'Mở khóa tài khoản này'"
+                               onclick="return confirm('Bạn có chắc chắn muốn thay đổi trạng thái tài khoản này?')">
+
+                                <svg th:if="${u.enabled}" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+
+                                <svg th:unless="${u.enabled}" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
 </div>
 
 </body>

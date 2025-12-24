@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý Voucher - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+
+    <link rel="stylesheet" th:href="@{/css/admin/coupon/list.css}">
+</head>
+<body>
+
+<div th:replace="admin/layout/header :: adminHeader"></div>
+
+<div style="display: flex; min-height: 100vh;">
+
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
+
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
+
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">🎫 Quản lý mã giảm giá</h2>
+                <p class="page-subtitle">Danh sách các chương trình khuyến mãi hiện có</p>
+            </div>
+
+            <a th:href="@{/admin/coupons/add}" class="btn-add-new">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Thêm mã mới
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th>Mã Code</th>
+                    <th>Giảm giá</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Trạng thái</th>
+                    <th width="140" class="text-right">Hành động</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="c : ${coupons}">
+                    <td th:text="'#'+${c.couponId}" style="color: #888;"></td>
+
+                    <td>
+                        <span class="code-badge" th:text="${c.code}"></span>
+                    </td>
+
+                    <td>
+                        <b style="color: #dc2626;" th:text="${c.discountPercent} + '%'"></b>
+                    </td>
+
+                    <td th:text="${c.startDate}"></td>
+                    <td th:text="${c.endDate}"></td>
+
+                    <td>
+                        <span th:if="${c.status}" class="status-badge status-active">● Đang chạy</span>
+                        <span th:unless="${c.status}" class="status-badge status-inactive">● Đã tắt</span>
+                    </td>
+
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <a th:href="@{'/admin/coupons/edit/' + ${c.couponId}}" class="btn-icon btn-edit" title="Chỉnh sửa">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </a>
+
+                            <form th:action="@{'/admin/coupons/toggle/' + ${c.couponId}}" method="post" style="display:inline;">
+                                <button type="submit" class="btn-icon"
+                                        th:classappend="${c.status} ? 'btn-stop' : 'btn-start'"
+                                        th:title="${c.status} ? 'Tắt mã này' : 'Kích hoạt mã này'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>

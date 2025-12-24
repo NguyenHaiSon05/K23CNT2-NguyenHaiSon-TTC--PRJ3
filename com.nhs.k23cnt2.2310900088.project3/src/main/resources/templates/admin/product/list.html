@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Quản lý sản phẩm</title>
+    <title>Quản lý sản phẩm - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/product/list.css}">
 </head>
 <body>
 
-<div class="admin-container">
+<div th:replace="admin/layout/header :: adminHeader"></div>
 
-    <div class="admin-header">
-        <h2>📦 Quản lý sản phẩm</h2>
-        <a href="/admin/products/create" class="btn btn-add">➕ Thêm sản phẩm</a>
-    </div>
+<div style="display: flex; min-height: 100vh;">
 
-    <table class="admin-table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Tồn kho</th>
-            <th>Danh mục</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
+    <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-        <tbody>
-        <tr th:each="p : ${products}">
-            <td th:text="${p.productId}"></td>
-            <td th:text="${p.name}"></td>
-            <td th:text="${p.price} + 'đ'"></td>
-            <td th:text="${p.stock}"></td>
-            <td th:text="${p.category.name}"></td>
-            <td class="action">
-                <a th:href="@{/admin/products/edit/{id}(id=${p.productId})}" class="btn btn-edit">✏️ Sửa</a>
-                <a th:href="@{/admin/products/delete/{id}(id=${p.productId})}"
-                   class="btn btn-delete"
-                   onclick="return confirm('Xóa sản phẩm này?')">🗑 Xóa</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
 
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <div>
+                <h2 style="font-size: 24px; font-weight: 700; color: #111827;">📦 Quản lý sản phẩm</h2>
+                <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">Quản lý danh sách trái cây hiện có</p>
+            </div>
+
+            <a href="/admin/products/create" class="btn-primary">
+                Thêm trái cây mới
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 50px;">ID</th>
+                    <th style="width: 80px;">Ảnh</th> <th>Tên sản phẩm</th>
+                    <th>Giá bán</th>
+                    <th>Tồn kho</th>
+                    <th>Danh mục</th>
+                    <th style="text-align: right;">Hành động</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="p : ${products}">
+                    <td th:text="'#' + ${p.productId}" style="color: #888; font-weight: 500;"></td>
+
+                    <td>
+                        <img th:src="@{${p.image}}" alt="img" class="table-img"
+                             onerror="this.src='https://placehold.co/40'">
+                    </td>
+
+                    <td>
+                        <b th:text="${p.name}" style="color: #333;"></b>
+                    </td>
+
+                    <td style="color: #1f8c5c; font-weight: 700;"
+                        th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">
+                    </td>
+
+                    <td>
+                        <span th:if="${p.stock > 10}" th:text="${p.stock}" class="badge badge-green"></span>
+                        <span th:if="${p.stock <= 10}" th:text="${p.stock} + ' (Sắp hết)'" class="badge badge-red"></span>
+                    </td>
+
+                    <td th:text="${p.category.name}" style="color: #555;"></td>
+
+                    <td style="text-align: right;">
+                        <a th:href="@{/admin/products/edit/{id}(id=${p.productId})}" class="btn-action btn-edit" title="Sửa">
+                            ✏️
+                        </a>
+                        <a th:href="@{/admin/products/delete/{id}(id=${p.productId})}"
+                           class="btn-action btn-delete"
+                           onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?')" title="Xóa">
+                            🗑
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
 </div>
 
 </body>

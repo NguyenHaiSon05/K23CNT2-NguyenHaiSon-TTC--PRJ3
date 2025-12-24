@@ -1,0 +1,106 @@
+/* --- CĂN GIỮA MÀN HÌNH --- */
+.centered-container {
+    display: flex;
+    justify-content: center; /* Căn giữa chiều ngang */
+    align-items: flex-start; /* Căn trên cùng (hoặc center nếu muốn giữa hẳn) */
+    margin-top: 20px;
+}
+
+/* --- THẺ FORM (CARD) --- */
+.form-card {
+    background: white;
+    width: 100%;
+    max-width: 600px; /* Giới hạn chiều rộng cho gọn */
+    padding: 40px;
+    border-radius: 16px; /* Bo góc tròn hơn chút cho mềm */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
+                0 8px 10px -6px rgba(0, 0, 0, 0.01); /* Bóng mờ 2 lớp */
+    border: 1px solid #f3f4f6;
+}
+
+/* --- TIÊU ĐỀ --- */
+.form-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+.form-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* --- CÁC Ô INPUT --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.required { color: #ef4444; }
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px; /* Ô input cao hơn xíu cho dễ nhập */
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s;
+    background-color: #f9fafb; /* Nền input hơi xám nhẹ */
+}
+
+.form-control:focus {
+    background-color: #fff;
+    border-color: #1f8c5c;
+    box-shadow: 0 0 0 4px rgba(31, 140, 92, 0.1);
+    outline: none;
+}
+
+/* --- NÚT BẤM --- */
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Căn giữa 2 nút */
+}
+
+.btn {
+    padding: 12px 30px; /* Nút to rộng ra */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background-color: #1f8c5c;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #166542;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 140, 92, 0.2);
+}
+
+.btn-secondary {
+    background-color: white;
+    border: 1px solid #d1d5db;
+    color: #374151;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}

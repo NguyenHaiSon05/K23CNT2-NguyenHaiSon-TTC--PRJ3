@@ -1,53 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin Panel</title>
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <title>Dashboard - Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
 </head>
 <body>
 
 <div th:replace="admin/layout/header :: adminHeader"></div>
 
-<div class="admin-wrapper">
+<div style="display: flex; min-height: 100vh;">
 
     <div th:replace="admin/layout/sidebar :: sidebar"></div>
 
-    <main class="admin-main">
+    <main style="flex: 1; padding: 30px; background-color: #f9fafb;">
 
-        <div class="admin-card">
-            <h2>Xin chào Admin 👋</h2>
-            <p>Quản trị viên:
-                <b th:text="${adminName}">Admin</b>
+        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 30px;">
+            <h2 style="margin: 0 0 10px 0; color: #111827; font-size: 24px;">Xin chào Admin 👋</h2>
+            <p style="margin: 0; color: #6b7280;">
+                Quản trị viên: <b style="color: #1f8c5c;" th:text="${adminName}">Admin</b>
             </p>
         </div>
 
-        <div class="stat-grid">
+        <div class="dashboard-grid">
 
-            <div class="stat-box">
-                <h4>Tổng sản phẩm</h4>
-                <span th:text="${totalProducts}">0</span>
+            <div class="stat-card card-blue">
+                <h4>📦 Tổng sản phẩm</h4>
+                <div class="number" th:text="${totalProducts != null ? totalProducts : 0}">0</div>
             </div>
 
-            <div class="stat-box">
-                <h4>Danh mục</h4>
-                <span th:text="${totalCategories}">0</span>
+            <div class="stat-card card-yellow">
+                <h4>📂 Danh mục</h4>
+                <div class="number" th:text="${totalCategories != null ? totalCategories : 0}">0</div>
             </div>
 
-            <div class="stat-box">
-                <h4>Đơn hàng</h4>
-                <span th:text="${totalOrders}">0</span>
+            <div class="stat-card card-orange">
+                <h4>🛒 Đơn hàng</h4>
+                <div class="number" th:text="${totalOrders != null ? totalOrders : 0}">0</div>
             </div>
 
-            <div class="stat-box">
-                <h4>Doanh thu</h4>
-                <span th:text="${#numbers.formatDecimal(totalRevenue,0,'COMMA',0,'POINT')} + ' đ'">
-            0 đ
-        </span>
+            <div class="stat-card card-green">
+                <h4>💰 Doanh thu</h4>
+                <div class="number"
+                     th:text="${totalRevenue != null ? #numbers.formatDecimal(totalRevenue, 0, 'COMMA', 0, 'POINT') + ' đ' : '0 đ'}">
+                    0 đ
+                </div>
             </div>
 
         </div>
-
-
 
     </main>
 </div>
