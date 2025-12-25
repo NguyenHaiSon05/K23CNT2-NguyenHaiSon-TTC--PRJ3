@@ -1,4 +1,4 @@
-/* GRID LIST - Giống hệt .product-grid ở Home */
+/* GRID LIST */
 .product-grid-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -9,43 +9,37 @@
 
 /* ITEM LIST */
 .list-item {
-    /* QUAN TRỌNG: Xóa padding: 10px đi để ảnh tràn viền giống Home */
     padding: 0;
-    /* Thêm căn giữa nội dung nếu cần giống Home */
     text-align: left;
 }
 
-/* ẢNH - Copy style từ .product-item img sang, có điều chỉnh nhẹ */
+
 .list-item .list-img {
     width: 100%;
-    /* Trang Home không set height vì ảnh gốc đã đều.
-       Nhưng để ảnh quả táo/cam (vốn hình vuông) trông giống ảnh giỏ quà (hình chữ nhật),
-       ta bắt buộc phải dùng aspect-ratio tỉ lệ 3:2 (ngang)
-    */
     aspect-ratio: 3 / 2;
-    object-fit: cover; /* Cắt ảnh khéo léo để không bị méo */
+    object-fit: cover;
 
-    border-radius: 10px; /* Giống Home */
+    border-radius: 10px;
     display: block;
-    transition: transform 0.3s ease; /* Giống Home */
+    transition: transform 0.3s ease;
 }
 
-/* HOVER - Giống Home */
+/* HOVER - */
 .list-item:hover .list-img {
     transform: scale(1.05);
 }
 
-/* TÊN SẢN PHẨM & GIÁ - Chỉnh lại cho khớp style Home */
+/* TÊN SẢN PHẨM & GIÁ */
 .list-item .product-name {
     font-size: 20px;
     margin-top: 15px;
-    font-weight: 600; /* Home dùng font mặc định hoặc bold nhẹ, bạn có thể chỉnh lại */
+    font-weight: 600;
     color: #000;
 }
 
 .list-item .product-price {
     font-size: 18px;
     font-weight: bold;
-    color: #444; /* Giống màu giá bên Home */
+    color: #444;
     margin-top: 5px;
 }

@@ -21,6 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByProductIdIn(List<Integer> ids);
 
     List<Product> findByCategory_CategoryId(Integer categoryId);
-
+    // Tìm theo tên sản phẩm (không phân biệt hoa thường)
+    List<Product> findByNameContainingIgnoreCase(String keyword);
 }
 

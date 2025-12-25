@@ -2,114 +2,173 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thanh toán</title>
+    <title>Thanh toán đơn hàng</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" th:href="@{/css/checkout/checkout.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
     <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/checkout/checkout.css}">
 </head>
+
 <body>
 
 <div th:replace="layout/header :: header"></div>
 
-<form th:action="@{/checkout/place-order}" method="post">
-
-    <div class="checkout-container">
-
-        <!-- ===== CỘT TRÁI ===== -->
-        <div class="checkout-left checkout-box">
-
-            <h3>Thông tin khách hàng</h3>
-
-            <div class="form-group">
-                <label>Họ và tên</label>
-                <input type="text" name="fullName" required>
-            </div>
-
-            <div class="form-group">
-                <label>Số điện thoại</label>
-                <input type="text" name="phone" required>
-            </div>
-
-            <div class="form-group">
-                <label>Địa chỉ giao hàng</label>
-                <input type="text" name="address" required>
-            </div>
-
-            <h3>Ghi chú đơn hàng</h3>
-            <div class="form-group">
-                <textarea name="note" placeholder="Ghi chú cho người bán..."></textarea>
-            </div>
-
-            <h3>Phương thức thanh toán</h3>
-
-            <div class="payment-method">
-                <label>
-                    <input type="radio" name="paymentMethod" value="COD" checked>
-                    💵 Thanh toán khi nhận hàng (COD)
-                </label>
-
-                <label>
-                    <input type="radio" name="paymentMethod" value="QR">
-                    🏦 Chuyển khoản ngân hàng
-                </label>
-            </div>
-
-            <!-- QR BOX -->
-            <div id="qr-box" class="qr-box" style="display: none;">
-                <h4>Quét mã QR để thanh toán</h4>
-
-                <img src="/image/qr-bank.png" alt="QR Thanh toán" width="220">
-
-            </div>
-
-
-        </div>
-
-        <!-- ===== CỘT PHẢI ===== -->
-        <div class="checkout-right checkout-box">
-
-            <h3>Đơn hàng của bạn</h3>
-
-            <table class="order-table">
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                </tr>
-
-                <tr th:each="item : ${cart.items}">
-                    <td th:text="${item.product.name}"></td>
-                    <td th:text="${item.quantity}"></td>
-                    <td th:text="${item.quantity * item.product.price} + 'đ'"></td>
-                </tr>
-            </table>
-
-            <div class="summary-row">
-                <span>Tạm tính</span>
-                <span th:text="${total} + 'đ'"></span>
-            </div>
-
-            <div class="summary-row" th:if="${discount > 0}">
-                <span>Giảm giá</span>
-                <span th:text="${discount} + '%'"></span>
-            </div>
-
-            <div class="summary-row summary-total">
-                <span>Tổng thanh toán</span>
-                <span th:text="${finalTotal} + 'đ'"></span>
-            </div>
-
-            <!-- 🔥 NÚT SUBMIT ĐÚNG -->
-            <button type="submit" class="btn-order">
-                ĐẶT HÀNG
-            </button>
-
-        </div>
-
+<div class="bg-light py-3 mb-4 border-bottom">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/cart" class="text-decoration-none text-muted">Giỏ hàng</a></li>
+                <li class="breadcrumb-item active fw-bold text-success" aria-current="page">Thanh toán</li>
+            </ol>
+        </nav>
     </div>
+</div>
 
-</form>
+<div class="container mb-5">
+    <form th:action="@{/checkout/place-order}" method="post">
+
+        <div class="row g-4">
+
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm rounded-3 p-4">
+                    <h4 class="fw-bold text-uppercase mb-4 text-success">
+                        <i class="fas fa-map-marker-alt me-2"></i>Thông tin giao hàng
+                    </h4>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-muted">HỌ VÀ TÊN</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                                <input type="text" name="fullName" class="form-control border-start-0 ps-0" placeholder="Nguyễn Văn A" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-muted">SỐ ĐIỆN THOẠI</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fas fa-phone text-muted"></i></span>
+                                <input type="text" name="phone" class="form-control border-start-0 ps-0" placeholder="09xxxxxxx" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-muted">ĐỊA CHỈ NHẬN HÀNG</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fas fa-home text-muted"></i></span>
+                                <input type="text" name="address" class="form-control border-start-0 ps-0" placeholder="Số nhà, đường, phường, quận..." required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-muted">GHI CHÚ (TÙY CHỌN)</label>
+                            <textarea name="note" class="form-control" rows="3" placeholder="Ví dụ: Giao hàng giờ hành chính, gọi trước khi giao..."></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-muted opacity-25">
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-wallet me-2 text-success"></i>Phương thức thanh toán</h5>
+
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" name="paymentMethod" id="cod" value="COD" checked>
+                            <label for="cod" class="d-flex align-items-center justify-content-between w-100 p-3 border rounded cursor-pointer">
+                                <div>
+                                    <i class="fas fa-money-bill-wave text-success me-2 fs-5"></i>
+                                    <span class="fw-bold">Thanh toán khi nhận hàng (COD)</span>
+                                </div>
+                                <i class="fas fa-check-circle text-success check-icon"></i>
+                            </label>
+                        </div>
+
+                        <div class="payment-option mt-2">
+                            <input type="radio" name="paymentMethod" id="bank" value="QR">
+                            <label for="bank" class="d-flex align-items-center justify-content-between w-100 p-3 border rounded cursor-pointer">
+                                <div>
+                                    <i class="fas fa-qrcode text-primary me-2 fs-5"></i>
+                                    <span class="fw-bold">Chuyển khoản ngân hàng (QR Code)</span>
+                                </div>
+                                <i class="fas fa-check-circle text-success check-icon"></i>
+                            </label>
+
+                            <div id="qr-box" class="mt-2 p-3 bg-light border rounded text-center" style="display: none;">
+                                <p class="small text-muted mb-2">Quét mã QR để thanh toán nhanh</p>
+                                <img src="/image/qr-bank.png" class="img-fluid rounded border bg-white p-2" width="180">
+                                <div class="mt-2 small text-danger fw-bold fst-italic">
+                                    * Nội dung CK: "Tên + SĐT"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h5 class="m-0 fw-bold text-uppercase">Đơn hàng của bạn</h5>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div class="order-scroll p-3" style="max-height: 300px; overflow-y: auto;">
+                            <div th:each="item : ${cart.items}" class="d-flex align-items-center mb-3 border-bottom pb-3">
+                                <div class="position-relative me-3">
+                                    <img th:src="@{${item.product.image}}" class="rounded border" width="60" height="60" style="object-fit: cover;">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                                          th:text="${item.quantity}">1</span>
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 small fw-bold" th:text="${item.product.name}">Tên SP</h6>
+                                    <div class="text-muted x-small" th:text="${item.product.unit}">kg</div>
+                                </div>
+
+                                <div class="text-end fw-bold text-dark small"
+                                     th:text="${#numbers.formatDecimal(item.quantity * item.product.price,0,'COMMA',0,'POINT')} + 'đ'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-light p-4">
+                            <div class="d-flex justify-content-between mb-2 small">
+                                <span class="text-muted">Tạm tính</span>
+                                <span class="fw-bold" th:text="${total} + 'đ'"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-3 small" th:if="${discount > 0}">
+                                <span class="text-success">Giảm giá</span>
+                                <span class="text-success fw-bold" th:text="'- ' + ${discount} + '%'"></span>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <span class="fw-bold fs-5">Tổng cộng</span>
+                                <span class="fw-bold fs-4 text-danger" th:text="${finalTotal} + 'đ'"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100 py-3 fw-bold text-uppercase shadow-sm checkout-btn">
+                                ĐẶT HÀNG NGAY
+                            </button>
+                            <p class="text-center text-muted x-small mt-3 mb-0">
+                                <i class="fas fa-shield-alt me-1"></i> Thông tin được bảo mật tuyệt đối
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div th:replace="layout/footer :: footer"></div>
 
 <script>
     const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
@@ -118,16 +177,15 @@
     paymentRadios.forEach(radio => {
         radio.addEventListener('change', function () {
             if (this.value === 'QR') {
+                // Hiệu ứng trượt xuống nhẹ
                 qrBox.style.display = 'block';
+                qrBox.classList.add('fade-in');
             } else {
                 qrBox.style.display = 'none';
             }
         });
     });
 </script>
-
-
-<div th:replace="layout/footer :: footer"></div>
 
 </body>
 </html>

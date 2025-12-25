@@ -149,3 +149,86 @@ body {
     color: #d63384;
     font-size: 14px;
 }
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* --- FORM INPUT --- */
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0ea545; /* Màu xanh khi focus */
+}
+
+/* Input group (icon + ô nhập) */
+.input-group-text {
+    background-color: #fff;
+    border-right: none;
+}
+
+.input-group .form-control {
+    border-left: none;
+}
+
+/* Khi focus vào ô input thì viền của cả group đổi màu */
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-color: #0ea545;
+}
+
+/* --- THANH TOÁN RADIO --- */
+/* Ẩn nút radio tròn mặc định xấu xí đi */
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+/* Style cho cái label bọc ngoài */
+.payment-option label {
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #dee2e6;
+}
+
+/* Icon check mặc định ẩn */
+.payment-option .check-icon {
+    display: none;
+}
+
+/* KHI ĐƯỢC CHỌN (CHECKED) */
+.payment-option input[type="radio"]:checked + label {
+    border-color: #0ea545;
+    background-color: #f0fff4; /* Nền xanh nhạt */
+    box-shadow: 0 0 0 1px #0ea545; /* Viền dày thêm chút */
+}
+
+.payment-option input[type="radio"]:checked + label .check-icon {
+    display: block; /* Hiện dấu tích xanh */
+}
+
+/* --- SCROLL LIST --- */
+/* Thanh cuộn nhỏ gọn cho list sản phẩm */
+.order-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+.order-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+/* --- BUTTON --- */
+.checkout-btn {
+    transition: transform 0.2s;
+    background-color: #0ea545;
+    border: none;
+}
+
+.checkout-btn:hover {
+    background-color: #098a39;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(14, 165, 69, 0.3) !important;
+}
+
+.x-small {
+    font-size: 12px;
+}

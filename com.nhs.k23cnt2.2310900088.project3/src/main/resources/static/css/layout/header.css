@@ -150,12 +150,474 @@
     color: #000 !important;
 }
 
+/* =====================
+   USER HEADER (SAFE)
+===================== */
+
+.header-user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 18px;
+}
+
+/* nút hiển thị */
+.header-user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+}
+
+.header-user-trigger i.fa-user {
+    font-size: 16px;
+}
+
+.header-user-trigger i.fa-chevron-down {
+    font-size: 10px;
+}
+
+/* menu xổ xuống */
+.header-user-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 160px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+/* item */
+.header-user-menu a {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+.header-user-menu a:hover {
+    background: #f5f5f5;
+    color: #0ea545;
+}
+
+.header-user-menu a.logout {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* hover hiện menu */
+.header-user:hover .header-user-menu {
+    display: flex;
+}
+
+/* --- USER ACCOUNT STYLE (GIỐNG TIKI/SHOPEE) --- */
+
+.header-user-wrapper {
+    position: relative;
+    cursor: pointer;
+    margin-right: 20px; /* Khoảng cách với nút Search/Cart */
+    padding: 5px 0;
+}
+
+/* Flexbox để xếp Icon và Chữ nằm ngang */
+.header-user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon người và chữ */
+}
+
+/* Chỉnh Icon người to lên và mảnh hơn (dùng fa-user outline) */
+.user-avatar-icon i {
+    font-size: 28px; /* Kích thước icon giống ảnh mẫu */
+    color: #444;     /* Màu xám đen, hoặc đổi thành #5d4b75 nếu thích màu tím */
+    font-weight: 300;
+}
+
+/* Cột chứa chữ: Xếp dọc */
+.user-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2; /* Giãn dòng hẹp lại cho gọn */
+    align-items: flex-start;
+}
+
+/* Dòng chữ nhỏ "Tài khoản của" */
+.sub-text {
+    font-size: 13px;
+    color: #666;
+    font-weight: 400;
+}
+
+/* Dòng Tên + Mũi tên */
+.main-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 600; /* In đậm tên */
+    color: #222;
+}
+
+.main-name i {
+    font-size: 11px; /* Mũi tên nhỏ thôi */
+    color: #555;
+    margin-top: 2px;
+}
+
+/* --- DROPDOWN MENU --- */
+.user-dropdown-menu {
+    position: absolute;
+    top: 120%; /* Đẩy xuống dưới một chút */
+    right: -10px; /* Canh lề phải */
+    width: 160px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none; /* Ẩn mặc định */
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+/* Style cho từng link trong menu */
+.user-dropdown-menu a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    transition: background 0.2s;
+    text-align: left;
+}
+
+.user-dropdown-menu a:hover {
+    background-color: #f8f9fa;
+    color: #0ea545; /* Màu xanh của web bạn */
+}
+
+.user-dropdown-menu a.logout {
+    border-top: 1px solid #eee;
+    color: #d63031; /* Màu đỏ cho đăng xuất */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Class này sẽ được Javascript thêm vào khi click */
+.user-dropdown-menu.active {
+    display: flex !important;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+/* =========================================
+   GIAO DIỆN HEADER MỚI (LAYOUT 3 PHẦN)
+   ========================================= */
+
+/* 1. KHUNG CHÍNH (HEADER MAIN) */
+.header-main {
+    padding: 15px 0;
+    background: #fff;
+    /* Đảm bảo flexbox căn giữa dọc */
+}
+
+/* 2. LOGO */
+.logo-img {
+    height: 60px; /* Giới hạn chiều cao logo cho gọn */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* 3. THANH TÌM KIẾM (NẰM GIỮA) */
+.search-box {
+    /* Đảm bảo ô tìm kiếm không bị co quá bé */
+    min-width: 400px;
+    max-width: 600px;
+    margin: 0 40px; /* Tạo khoảng cách với Logo và User */
+}
+
+/* Ô nhập liệu */
+.search-box input.form-control {
+    height: 45px;
+    border: 2px solid #0ea545; /* Viền xanh chủ đạo */
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.search-box input.form-control:focus {
+    background-color: #fff;
+    box-shadow: none; /* Bỏ shadow xanh mặc định của Bootstrap */
+}
+
+/* Nút tìm kiếm */
+.search-box button {
+    height: 45px;
+    padding: 0 25px;
+    background-color: #0ea545;
+    border: 2px solid #0ea545;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+    background-color: #087a35;
+    border-color: #087a35;
+}
+
+/* 4. KHU VỰC TÀI KHOẢN & GIỎ HÀNG (BÊN PHẢI) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Khoảng cách giữa User và Cart */
+}
+
+/* Style chung cho link User và Cart */
+.header-actions a,
+.header-user-wrapper {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.header-actions a:hover,
+.header-user-wrapper:hover .main-name {
+    color: #0ea545;
+}
+
+/* Icon (User / Cart) */
+.header-actions i.far,
+.header-actions i.fas {
+    color: #444; /* Màu xám đen cho icon giống mẫu */
+    transition: 0.2s;
+}
+
+/* Hover vào thì icon sáng lên */
+.header-actions a:hover i,
+.header-user-wrapper:hover i {
+    color: #0ea545;
+}
+
+/* Text phụ (Xin chào / Đăng nhập) */
+.sub-text {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: -2px;
+}
+
+/* Text chính (Tên user / Giỏ hàng) */
+.main-name,
+.header-actions .fw-bold {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Badge số lượng giỏ hàng */
+.badge.bg-danger {
+    background-color: #d0011b !important;
+    border: 2px solid #fff; /* Viền trắng cắt vào icon */
+    font-size: 10px;
+    padding: 3px 6px;
+}
+
+/* --- MENU DROPDOWN USER (Chỉnh lại vị trí cho khớp) --- */
+.header-user-wrapper {
+    position: relative;
+}
+
+.user-dropdown-menu {
+    top: 150%; /* Đẩy xuống xa hơn chút để không che mất tên */
+    right: -10px;
+    width: 200px;
+    border-top: 3px solid #0ea545; /* Điểm nhấn viền trên màu xanh */
+}
+
+/* Mũi tên nhỏ bên cạnh tên User */
+.header-user-wrapper .fa-chevron-down {
+    font-size: 10px;
+    color: #999;
+    transition: transform 0.3s;
+}
+
+.header-user-wrapper:hover .fa-chevron-down {
+    transform: rotate(180deg);
+    color: #0ea545;
+}
+
+/* (Live Search) --- */
+
+.search-suggestions-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 9999;
+    display: none;
+    border: 1px solid #eee;
+    margin-top: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Tiêu đề nhỏ "Sản phẩm gợi ý" */
+.suggestion-header {
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    text-transform: uppercase;
+}
+
+/* Từng dòng sản phẩm */
+.suggestion-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+/* Hover vào thì đổi màu xanh nhạt */
+.suggestion-item:hover {
+    background-color: #f0fdf4;
+}
+
+/* Ảnh nhỏ */
+.suggestion-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+/* Phần thông tin chữ */
+.suggestion-item .info {
+    flex-grow: 1;
+}
+
+.suggestion-item .name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2px;
+    /* Cắt bớt nếu tên quá dài */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+.suggestion-item .price {
+    font-size: 13px;
+    color: #d0011b; /* Giá màu đỏ */
+    font-weight: 700;
+}
+
+/* Nút Xem tất cả ở cuối */
+.view-all-btn {
+    padding: 12px;
+    font-size: 13px;
+    color: #0ea545;
+    background: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.view-all-btn:hover {
+    background: #0ea545;
+    color: #fff;
+}
 
 
+/* =========================================
+   THANH TÌM KIẾM PREMIUM (ĐÃ SỬA LỖI)
+   ========================================= */
 
+/* 1. Khung bao bọc chung */
+.premium-search-group {
+    border-radius: 50px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(14, 165, 69, 0.1);
+    border: 2px solid #eee;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex; /* Đảm bảo input và button nằm ngang hàng */
+    align-items: center;
+}
 
+/* Hiệu ứng khi click vào */
+.premium-search-group:focus-within {
+    border-color: #0ea545;
+    box-shadow: 0 8px 25px rgba(14, 165, 69, 0.25);
+    transform: translateY(-2px);
+} /* <--- BẠN BỊ THIẾU DẤU NÀY Ở CODE CŨ */
 
+/* 2. Ô nhập liệu (Input) */
+.premium-search-group .form-control {
+    height: 48px;
+    border: none !important; /* Quan trọng: Xóa viền cũ */
+    background: transparent;
+    font-size: 15px;
+    color: #333;
+    box-shadow: none !important;
+    padding-left: 20px;
+    flex-grow: 1; /* Tự giãn đầy khoảng trống */
+}
 
+.premium-search-group .form-control::placeholder {
+    color: #999;
+    font-weight: 400;
+}
+
+/* 3. Nút bấm (Button) */
+.premium-search-group .btn-success {
+    background-color: #0ea545;
+    border: none !important;
+    height: 48px; /* Khớp chiều cao với khung */
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border-radius: 0 50px 50px 0; /* Bo tròn góc phải */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và chữ */
+    margin: 0; /* Xóa margin thừa nếu có */
+}
+
+/* Hiệu ứng khi di chuột vào nút */
+.premium-search-group .btn-success:hover {
+    background-color: #098a39;
+    box-shadow: 0 0 15px rgba(14, 165, 69, 0.5);
+}
+
+.premium-search-group .btn-success i {
+    font-size: 16px;
+}
 
 
 

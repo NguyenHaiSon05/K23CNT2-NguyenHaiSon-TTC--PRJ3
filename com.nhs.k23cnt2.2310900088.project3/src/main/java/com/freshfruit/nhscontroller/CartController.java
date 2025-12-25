@@ -35,25 +35,25 @@ public class CartController {
 
         var cart = cartService.getCartByUser(user.getUserId());
 
-        double totalPrice = cart != null
+        // 1. Tính tổng tiền GỐC (Chưa trừ gì cả)
+        double originalTotalPrice = cart != null
                 ? cartService.getTotalPrice(cart)
                 : 0;
 
-        // 👉 LẤY COUPON TỪ SESSION
+        // 2. Lấy thông tin giảm giá
         Coupon coupon = (Coupon) session.getAttribute("coupon");
-
         double discountPercent = 0;
-        double finalPrice = totalPrice;
 
         if (coupon != null) {
             discountPercent = coupon.getDiscountPercent();
-            finalPrice = totalPrice * (100 - discountPercent) / 100;
         }
 
-        model.addAttribute("cartItems",
-                cart != null ? cart.getItems() : null);
+        // 3. Gửi dữ liệu sang HTML
+        model.addAttribute("cartItems", cart != null ? cart.getItems() : null);
 
-        model.addAttribute("totalPrice", finalPrice);
+        // QUAN TRỌNG: Gửi giá gốc sang, không trừ tiền ở đây
+        model.addAttribute("totalPrice", originalTotalPrice);
+
         model.addAttribute("discount", discountPercent);
 
         return "cart/cart";

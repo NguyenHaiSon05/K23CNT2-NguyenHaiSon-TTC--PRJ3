@@ -17,23 +17,23 @@
     margin-top: 5px;
 }
 
-/* --- NÚT THÊM MỚI (CHUẨN MẪU BẠN THÍCH) --- */
+/* --- NÚT THÊM MỚI  --- */
 .btn-add-new {
-    background-color: #1f8c5c; /* Màu xanh lá chuẩn của trang Sản phẩm */
+    background-color: #1f8c5c;
     color: white !important;
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách icon và chữ */
+    gap: 8px;
     text-decoration: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: 0.2s;
 }
 
 .btn-add-new:hover {
-    background-color: #166542; /* Đậm hơn khi hover */
+    background-color: #166542;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
@@ -104,8 +104,8 @@
 .btn-edit { background-color: #eff6ff; color: #3b82f6; }
 .btn-edit:hover { background-color: #3b82f6; color: white; }
 
-.btn-stop { background-color: #fee2e2; color: #ef4444; } /* Nút Tắt màu đỏ */
+.btn-stop { background-color: #fee2e2; color: #ef4444; }
 .btn-stop:hover { background-color: #ef4444; color: white; }
 
-.btn-start { background-color: #d1fae5; color: #10b981; } /* Nút Bật màu xanh */
+.btn-start { background-color: #d1fae5; color: #10b981; }
 .btn-start:hover { background-color: #10b981; color: white; }

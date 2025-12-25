@@ -13,55 +13,149 @@
     <link rel="stylesheet" th:href="@{/css/layout/header.css}">
 
 
-    <div class="header-main py-2 border-bottom position-relative">
-        <div class="container d-flex justify-content-between align-items-center">
+    <div class="header-main py-3 border-bottom bg-white">
+        <div class="container d-flex align-items-center">
 
-            <div class="header-social d-flex align-items-center gap-4">
-                <a href="#"><i class="fab fa-facebook-f fs-5"></i></a>
-                <a href="#"><i class="fab fa-instagram fs-5"></i></a>
-                <a href="#"><i class="fab fa-tiktok fs-5"></i></a>
-            </div>
-
-
-            <a href="/" class="header-logo d-flex align-items-center text-decoration-none">
+            <a href="/" class="header-logo d-flex align-items-center text-decoration-none me-5">
                 <img src="/image/logo.png" class="logo-img" alt="logo">
                 <h2 class="logo-text m-0">Fresh Fruit</h2>
             </a>
 
+            <div class="search-box flex-grow-1 me-5 position-relative">
 
+                <form action="/search" method="get" class="d-flex" autocomplete="off">
+                    <div class="input-group premium-search-group">
+                        <input type="text"
+                               id="searchInput"
+                               class="form-control border-end-0 ps-4"
+                               name="keyword"
+                               placeholder="Bạn muốn tìm quả gì hôm nay...?"
+                               onkeyup="fetchSuggestions(this.value)">
 
-            <div class="header-icons d-flex align-items-center">
+                        <button class="btn btn-success border-start-0 px-4 fw-bold d-flex align-items-center gap-2"
+                                type="submit">
+                            <i class="fas fa-search"></i> <span>TÌM KIẾM</span>
+                        </button>
+                    </div>
+                </form>
 
-                <!-- Nếu CHƯA đăng nhập -->
+                <div id="suggestionBox" class="search-suggestions-box shadow rounded">
+                </div>
+
+            </div>
+
+            <script>
+                let timeout = null;
+
+                function fetchSuggestions(keyword) {
+                    const box = document.getElementById('suggestionBox');
+
+                    // Nếu xóa hết chữ thì ẩn hộp gợi ý đi
+                    if (!keyword || keyword.trim() === '') {
+                        box.style.display = 'none';
+                        return;
+                    }
+
+                    // Chờ 300ms sau khi ngừng gõ mới gửi yêu cầu (để đỡ lag server)
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+
+                        // Gọi API Java chúng ta vừa viết ở Bước 1
+                        fetch('/api/search-suggest?keyword=' + encodeURIComponent(keyword))
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.length > 0) {
+                                    let html = '<div class="suggestion-header">Sản phẩm gợi ý</div>';
+
+                                    data.forEach(p => {
+                                        // Định dạng tiền Việt
+                                        let price = new Intl.NumberFormat('vi-VN').format(p.price);
+
+                                        // Tạo HTML cho từng dòng sản phẩm
+                                        html += `
+                                            <a href="/product/${p.id}" class="suggestion-item d-flex align-items-center gap-3 text-decoration-none">
+                                                <img src="${p.image}" alt="${p.name}">
+                                                <div class="info">
+                                                    <div class="name">${p.name}</div>
+                                                    <div class="price">${price}đ / ${p.unit}</div>
+                                                </div>
+                                            </a>
+                                        `;
+                                    });
+
+                                    // Thêm nút "Xem tất cả" ở cuối
+                                    html += `
+                                        <a href="/search?keyword=${keyword}" class="view-all-btn text-center d-block">
+                                            Xem thêm kết quả cho "${keyword}"
+                                        </a>
+                                    `;
+
+                                    box.innerHTML = html;
+                                    box.style.display = 'block';
+                                } else {
+                                    box.style.display = 'none'; // Không tìm thấy thì ẩn
+                                }
+                            })
+                            .catch(err => console.error(err));
+
+                    }, 300);
+                }
+
+                // Khi click ra ngoài khoảng trắng thì ẩn hộp gợi ý
+                document.addEventListener('click', function(e) {
+                    const box = document.getElementById('suggestionBox');
+                    const input = document.getElementById('searchInput');
+                    if (box && input && !box.contains(e.target) && !input.contains(e.target)) {
+                        box.style.display = 'none';
+                    }
+                });
+            </script>
+
+            <div class="header-actions d-flex align-items-center gap-4">
+
                 <div th:if="${session.loggedUser == null}">
-                    <a href="/login" class="me-4 text-dark">
-                        <i class="far fa-user fs-4"></i>
+                    <a href="/login" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                        <i class="far fa-user fs-3 text-muted"></i>
+                        <div class="d-flex flex-column" style="line-height: 1.2;">
+                            <span style="font-size: 13px;">Đăng nhập / Đăng ký</span>
+                            <span class="fw-bold" style="font-size: 15px;">Tài khoản <i class="fas fa-caret-down"></i></span>
+                        </div>
                     </a>
                 </div>
 
-                <!-- Nếu ĐÃ đăng nhập -->
-                <div th:if="${session.loggedUser != null}" class="me-4 text-dark d-flex align-items-center gap-2">
+                <div th:if="${session.loggedUser != null}" class="header-user-wrapper" onclick="toggleUserMenu(event)">
+                    <div class="header-user-info d-flex align-items-center gap-2">
+                        <div class="user-avatar-icon">
+                            <i class="far fa-user fs-2 text-secondary"></i>
+                        </div>
+                        <div class="user-details d-flex flex-column" style="line-height: 1.2;">
+                            <span class="sub-text text-muted" style="font-size: 13px;">Xin chào,</span>
+                            <div class="main-name fw-bold text-dark">
+                                <span th:text="${session.loggedUser.fullName}">User</span>
+                                <i class="fas fa-chevron-down small ms-1"></i>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Link tới trang tài khoản -->
-                    <a href="/account" class="text-dark d-flex align-items-center gap-2 text-decoration-none">
-                        <i class="fas fa-user-circle fs-4"></i>
-                    </a>
-
+                    <div id="userDropdown" class="user-dropdown-menu">
+                        <a href="/account/profile">Tài khoản</a>
+                        <a href="/account/orders">Đơn hàng</a>
+                        <a href="/account/address">Địa chỉ</a>
+                        <a href="/logout" class="logout">Đăng xuất</a>
+                    </div>
                 </div>
 
-                <a href="/search" class="me-4 text-dark">
-                    <i class="fas fa-search fs-4"></i>
+                <a href="/cart" class="position-relative d-flex align-items-center gap-2 text-decoration-none text-dark">
+                    <div class="position-relative">
+                        <i class="fas fa-shopping-bag fs-3 text-secondary"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light"
+                              style="font-size: 10px;"
+                              th:text="${cartCount}">0</span>
+                    </div>
+                    <div class="d-none d-xl-block fw-bold" style="font-size: 15px;">
+                        Giỏ hàng
+                    </div>
                 </a>
-
-                <a href="/cart" class="text-dark position-relative">
-                    <i class="fas fa-shopping-bag fs-4"></i>
-
-                    <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                          th:text="${cartCount}">
-                        0
-                    </span>
-                </a>
-
 
             </div>
         </div>
@@ -147,5 +241,30 @@
 
         </div>
     </nav>
+
+
+    <script>
+        function toggleUserMenu(event) {
+            // Ngăn chặn hành vi click lan ra ngoài
+            event.stopPropagation();
+
+            // Lấy phần tử menu
+            var menu = document.getElementById("userDropdown");
+
+            // Bật/Tắt class 'active' (nếu có thì xóa, chưa có thì thêm)
+            menu.classList.toggle("active");
+        }
+
+        // Sự kiện click toàn màn hình để tắt menu khi bấm ra ngoài
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById("userDropdown");
+            var btn = document.querySelector(".header-user-wrapper");
+
+            // Nếu menu đang mở VÀ người dùng click KHÔNG phải vào nút user
+            if (menu && menu.classList.contains('active') && !btn.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 
 </header>

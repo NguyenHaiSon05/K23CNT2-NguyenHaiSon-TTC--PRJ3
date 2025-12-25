@@ -1,8 +1,8 @@
 /* --- CĂN GIỮA MÀN HÌNH --- */
 .centered-container {
     display: flex;
-    justify-content: center; /* Căn giữa chiều ngang */
-    align-items: flex-start; /* Căn trên cùng (hoặc center nếu muốn giữa hẳn) */
+    justify-content: center;
+    align-items: flex-start;
     margin-top: 20px;
 }
 
@@ -10,11 +10,11 @@
 .form-card {
     background: white;
     width: 100%;
-    max-width: 600px; /* Giới hạn chiều rộng cho gọn */
+    max-width: 600px; /
     padding: 40px;
-    border-radius: 16px; /* Bo góc tròn hơn chút cho mềm */
+    border-radius: 16px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
-                0 8px 10px -6px rgba(0, 0, 0, 0.01); /* Bóng mờ 2 lớp */
+                0 8px 10px -6px rgba(0, 0, 0, 0.01);
     border: 1px solid #f3f4f6;
 }
 
@@ -24,7 +24,7 @@
     font-weight: 700;
     color: #111827;
     margin-bottom: 5px;
-    text-align: center; /* Căn giữa tiêu đề */
+    text-align: center;
 }
 
 .form-subtitle {
@@ -51,12 +51,12 @@
 
 .form-control {
     width: 100%;
-    padding: 12px 16px; /* Ô input cao hơn xíu cho dễ nhập */
+    padding: 12px 16px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 14px;
     transition: all 0.2s;
-    background-color: #f9fafb; /* Nền input hơi xám nhẹ */
+    background-color: #f9fafb;
 }
 
 .form-control:focus {
@@ -71,11 +71,11 @@
     margin-top: 30px;
     display: flex;
     gap: 15px;
-    justify-content: center; /* Căn giữa 2 nút */
+    justify-content: center;
 }
 
 .btn {
-    padding: 12px 30px; /* Nút to rộng ra */
+    padding: 12px 30px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;

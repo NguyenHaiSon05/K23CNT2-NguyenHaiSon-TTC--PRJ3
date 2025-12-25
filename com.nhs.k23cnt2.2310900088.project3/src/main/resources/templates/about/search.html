@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tìm kiếm: [[${keyword}]]</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/product/list.css}"> <style>
+    body { font-family: 'Quicksand', sans-serif; }
+    .search-header { margin: 30px 0; }
+    .search-keyword { color: #0ea545; font-weight: 700; font-style: italic; }
+    .no-result { min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #777; }
+</style>
+</head>
+
+<body>
+
+<div th:replace="layout/header :: header"></div>
+
+<div class="container my-5">
+
+    <div class="search-header text-center">
+        <h3>Kết quả tìm kiếm cho: "<span class="search-keyword" th:text="${keyword}"></span>"</h3>
+        <p class="text-muted" th:if="${products != null}">
+            Tìm thấy <strong th:text="${products.size()}">0</strong> sản phẩm
+        </p>
+    </div>
+
+    <div th:if="${products == null || products.isEmpty()}" class="no-result">
+        <i class="fas fa-search fa-3x mb-3 text-muted opacity-50"></i>
+        <h4>Rất tiếc, không tìm thấy sản phẩm nào!</h4>
+        <p>Hãy thử tìm kiếm với từ khóa khác (ví dụ: Táo, Nho, Giỏ quà...)</p>
+        <a href="/" class="btn btn-success mt-2">Về trang chủ</a>
+    </div>
+
+    <div class="product-grid-list" th:if="${products != null && !products.isEmpty()}">
+
+        <div class="list-item" th:each="p : ${products}">
+            <a th:href="@{'/product/' + ${p.productId}}" class="text-decoration-none">
+
+                <div class="overflow-hidden rounded-3 mb-3">
+                    <img th:src="@{${p.image}}" class="list-img w-100" alt="product">
+                </div>
+
+                <h3 class="product-name text-dark text-truncate" th:text="${p.name}">Tên SP</h3>
+
+                <p class="product-price text-danger fw-bold"
+                   th:text="${#numbers.formatDecimal(p.price,0,'COMMA',0,'POINT')} + 'đ / ' + ${p.unit}">
+                    0đ
+                </p>
+            </a>
+
+            <a th:href="@{/cart/add/{id}(id=${p.productId})}" class="btn btn-outline-success w-100 mt-2">
+                <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>

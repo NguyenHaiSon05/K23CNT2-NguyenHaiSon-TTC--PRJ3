@@ -7,25 +7,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 public class Review {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private Integer rating;
+    private Integer rating; // 1–5
 
-    @Column(columnDefinition = "TEXT")
     private String comment;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

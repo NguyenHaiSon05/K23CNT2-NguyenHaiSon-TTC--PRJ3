@@ -167,3 +167,44 @@
 .col-total   { width: 15%; }
 .col-remove  { width: 10%; }
 
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f8f9fa; /* Nền xám nhạt cho nổi bật khối trắng */
+}
+
+/* Link sản phẩm */
+.product-link:hover {
+    color: #0ea545 !important;
+}
+
+/* Nút thanh toán hiệu ứng */
+.checkout-btn {
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #0ea545;
+    border: none;
+}
+
+.checkout-btn:hover {
+    background-color: #098a39;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(14, 165, 69, 0.3) !important;
+}
+
+/* Ô nhập số lượng */
+.qty-control button:hover {
+    background-color: #0ea545;
+    color: white;
+    border-color: #0ea545;
+}
+
+.qty-control input:focus {
+    box-shadow: none;
+    border-color: #6c757d;
+}
+
+/* Bảng */
+.table th {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
